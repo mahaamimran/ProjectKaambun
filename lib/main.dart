@@ -3,9 +3,10 @@ import 'dart:ui';
 import 'dart:io';
 import 'signUp.dart';
 import 'signIn.dart';
+import 'welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 void main() {
-  runApp(SignUpPage());
+  runApp(WelcomePage());
 }
