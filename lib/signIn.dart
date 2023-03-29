@@ -1,18 +1,17 @@
 // ignore_for_file: use_key_in_widget_constructors, unnecessary_import, prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, file_names
-
 import 'dart:ui';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,14 +24,14 @@ class _SignUpPageState extends State<SignUpPage> {
             padding: EdgeInsets.all(10.0),
             child: Stack(
               children: [
-                // "Hi there!"
+                // "welcome back"
                 Positioned(
                   top: 142,
                   left: 0,
                   right: 0,
                   child: Text(
-                    "Hi there!",
-                    key: Key("hitherekey"),
+                    "Welcome back!",
+                    key: Key("welcomebackkey"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -45,14 +44,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
 
-                // "welcome to kaamBun"
+                // "you've been missed"
                 Positioned(
                   top: 180,
                   left: 0,
                   right: 0,
                   child: Text(
-                    "welcome to kaamBun.",
-                    key: Key("welcometokaambunkey"),
+                    "you've been missed.",
+                    key: Key("you'vebeenmissedkey"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -200,18 +199,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
 
-                 // By signing up you agree to Terms & Conditions
+                // recover password
                 Positioned(
-                  left: 0,
-                  right: 0,
-                  top: 540,
+                  left: 237,
+                  top: 438,
                   child: Text(
-                    "(By signing up you agree to Terms & Conditions)",
-                    key: Key("t&ckey"),
-                    
+                    "Recover Password?",
+                    key: Key(
+                      "RecoverPasswordkey",
+                    ),
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 12,
+                      fontSize: 13,
                       fontFamily: "Cupertino",
                       letterSpacing: 0,
                     ),
@@ -283,14 +282,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
 
-                 // "Already have an account? sign in"
+                // "dont have an account? sign up"
                 Positioned(
                   top: 767,
                   left: 0,
                   right: 0,
                   child: RichText(
                     text: TextSpan(
-                      text: "Already have an account? ",
+                      text: "Don’t have an account? ",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 13,
@@ -299,15 +298,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       children: [
                         TextSpan(
-                          text: "Log in",
+                          text: "Sign up",
                           style: TextStyle(
                             color: Color.fromRGBO(203, 124, 229, 1),
                             fontWeight: FontWeight.bold,
                           ),
-                         recognizer: TapGestureRecognizer()
-                         ..onTap=() {
-                           //print('object');
-                         }
                         ),
                       ],
                     ),
