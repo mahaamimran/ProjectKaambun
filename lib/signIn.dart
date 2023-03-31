@@ -311,7 +311,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
 
                 // logos
-               Positioned(
+                Positioned(
                   top: 660,
                   left: 150,
                   //right: 0,
@@ -329,7 +329,7 @@ class _SignInPageState extends State<SignInPage> {
                     File("/Users/mahamimran/project/assets/applelogo.png"),
                   ),
                 ),
-                 Positioned(
+                Positioned(
                   top: 660,
                   left: 250,
                   //right: 0,
@@ -352,5 +352,3 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
-
-
