@@ -9,5 +9,5 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
 void main() {
-  runApp(HomePage());
+  runApp(WelcomePage());
 }
