@@ -26,18 +26,16 @@ class _SignInPageState extends State<SignInPage> {
               children: [
                 // "welcome back"
                 Positioned(
-                  top: 142,
+                  top: MediaQuery.of(context).size.height * 0.165,
                   left: 0,
                   right: 0,
                   child: Text(
                     "Welcome back!",
-                    key: Key("welcomebackkey"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 26,
+                      fontSize: MediaQuery.of(context).size.width * 0.075,
                       fontWeight: FontWeight.w700,
-                      // w100 is thin w900 is fat
                       fontFamily: "Cupertino",
                       letterSpacing: 0,
                     ),
@@ -46,7 +44,7 @@ class _SignInPageState extends State<SignInPage> {
 
                 // "you've been missed"
                 Positioned(
-                  top: 180,
+                  top: MediaQuery.of(context).size.height * 0.21,
                   left: 0,
                   right: 0,
                   child: Text(
@@ -55,7 +53,7 @@ class _SignInPageState extends State<SignInPage> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 14,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       fontFamily: "Cupertino",
                       letterSpacing: 0,
                     ),
@@ -64,14 +62,14 @@ class _SignInPageState extends State<SignInPage> {
 
                 // username dabba
                 Positioned(
-                  left: 0,
-                  right: 0,
-                  top: 286,
+                  left: MediaQuery.of(context).size.width * 0.005,
+                  right: MediaQuery.of(context).size.width * 0.005,
+                  top: MediaQuery.of(context).size.height * 0.334,
                   child: Container(
                     key: Key("usernamedabba"),
                     // dabba dimentions
-                    width: 343,
-                    height: 56,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.068,
                     decoration: BoxDecoration(
                       color: Color(0xff393c41),
                       borderRadius: BorderRadius.circular(10),
@@ -81,14 +79,14 @@ class _SignInPageState extends State<SignInPage> {
 
                 // password dabba
                 Positioned(
-                  left: 0,
-                  right: 0,
-                  top: 366,
+                  left: MediaQuery.of(context).size.width * 0.005,
+                  right: MediaQuery.of(context).size.width * 0.005,
+                  top: MediaQuery.of(context).size.height * 0.427,
                   child: Container(
                     key: Key("usernamedabba"),
                     // dabba dimentions
-                    width: 343,
-                    height: 56,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.068,
                     decoration: BoxDecoration(
                       color: Color(0xff393c41),
                       borderRadius: BorderRadius.circular(10),
@@ -98,15 +96,15 @@ class _SignInPageState extends State<SignInPage> {
 
                 // username text
                 Positioned(
-                  top: 307,
-                  left: 28,
+                  top: MediaQuery.of(context).size.height * 0.36,
+                  left: MediaQuery.of(context).size.width * 0.05,
                   right: 0,
                   child: Text(
                     "Enter Username",
                     key: Key("enterusernamekey"),
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 12,
+                      fontSize: MediaQuery.of(context).size.height * 0.014,
                       fontFamily: "Cupertino",
                       letterSpacing: 0,
                     ),
@@ -115,15 +113,15 @@ class _SignInPageState extends State<SignInPage> {
 
                 // password text
                 Positioned(
-                  top: 386,
-                  left: 28,
+                  top: MediaQuery.of(context).size.height * 0.453,
+                  left: MediaQuery.of(context).size.width * 0.05,
                   right: 0,
                   child: Text(
                     "Password",
                     key: Key("passwordkey"),
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 12,
+                      fontSize: MediaQuery.of(context).size.height * 0.014,
                       fontFamily: "Cupertino",
                       letterSpacing: 0,
                     ),
@@ -133,26 +131,25 @@ class _SignInPageState extends State<SignInPage> {
                 // eye icon
                 Positioned(
                   // placement
-                  top: 386,
-                  left: 330,
-                  // dimentions
-                  width: 18,
-                  height: 17,
+                  top: MediaQuery.of(context).size.height * 0.45,
+                  left: MediaQuery.of(context).size.width * 0.86,
+                  // dimensions
+                  width: MediaQuery.of(context).size.width * 0.05,
+                  height: MediaQuery.of(context).size.height * 0.03,
                   child: Image.file(
-                    width: 16.62,
-                    height: 32,
                     File('/Users/mahamimran/project/assets/eyeicon.png'),
                     key: Key('eyeIconKey'),
                   ),
                 ),
 
-                // Sign in button
+                // sign in button
                 Positioned(
-                  left: 16,
-                  top: 469,
+                  left: MediaQuery.of(context).size.width * 0.02,
+                  right: MediaQuery.of(context).size.width * 0.02,
+                  top: MediaQuery.of(context).size.height * 0.555,
                   child: Container(
-                    width: 343,
-                    height: 56,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.07,
                     child: Row(
                       key: Key("SignInButtonKey"),
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -163,19 +160,16 @@ class _SignInPageState extends State<SignInPage> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: MediaQuery.of(context).size.width * 0.04,
                             fontFamily: "Cupertino",
                             letterSpacing: 0,
                           ),
                         ),
                       ],
                     ),
-                    // padding around sign in button
-                    padding: EdgeInsets.only(
-                      left: 112,
-                      right: 112,
-                      top: 18,
-                      bottom: 18,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * 0.1,
+                      vertical: MediaQuery.of(context).size.height * 0.02,
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -186,7 +180,6 @@ class _SignInPageState extends State<SignInPage> {
                           blurRadius: 16,
                         ),
                       ],
-                      // gradient
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -199,18 +192,18 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ),
 
-                // recover password
+                // forgot password
                 Positioned(
-                  left: 237,
-                  top: 438,
+                  left: MediaQuery.of(context).size.width * 0.67,
+                  top: MediaQuery.of(context).size.height * 0.51,
                   child: Text(
-                    "Recover Password?",
+                    "Forgot Password?",
                     key: Key(
-                      "RecoverPasswordkey",
+                      "forgptPasswordkey",
                     ),
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 13,
+                      fontSize: MediaQuery.of(context).size.width * 0.03,
                       fontFamily: "Cupertino",
                       letterSpacing: 0,
                     ),
@@ -220,18 +213,19 @@ class _SignInPageState extends State<SignInPage> {
 
                 // lines
                 Positioned(
-                  left: 34,
-                  top: 627,
+                  left: 0,
+                  right: 0,
+                  top: MediaQuery.of(context).size.height * 0.737,
                   child: Container(
-                    width: 308,
-                    height: 20,
+                    width: MediaQuery.of(context).size.width * 0.67,
+                    height: MediaQuery.of(context).size.height * 0.025,
                     padding: EdgeInsets.symmetric(),
                     child: Row(
                       key: Key("LinesKey"),
                       children: [
                         Container(
                           key: Key("Line1Key"),
-                          width: 125,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           height: 0,
                           decoration: BoxDecoration(
                             border: Border(
@@ -243,11 +237,11 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                         ),
                         SizedBox(
-                          width: 55,
+                          width: MediaQuery.of(context).size.width * 0.15,
                         ),
                         Container(
                           key: Key("Line2Key"),
-                          width: 125,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           height: 0,
                           decoration: BoxDecoration(
                             border: Border(
@@ -266,7 +260,7 @@ class _SignInPageState extends State<SignInPage> {
 
                 // OR
                 Positioned(
-                  top: 629,
+                  top: MediaQuery.of(context).size.height * 0.74,
                   left: 0,
                   right: 0,
                   child: Text(
@@ -284,7 +278,7 @@ class _SignInPageState extends State<SignInPage> {
 
                 // "dont have an account? sign up"
                 Positioned(
-                  top: 767,
+                  top: MediaQuery.of(context).size.height * 0.93,
                   left: 0,
                   right: 0,
                   child: RichText(
@@ -311,36 +305,30 @@ class _SignInPageState extends State<SignInPage> {
                 ),
 
                 // logos
-                Positioned(
-                  top: 660,
-                  left: 150,
-                  //right: 0,
-                  child: Image.file(
-                    key: Key("AppleLogoKey"),
-                    File("/Users/mahamimran/project/assets/googlelogo.png"),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.83, // adjust as needed
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        key: Key("LogosKey"),
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset(
+                            '/Users/mahamimran/project/assets/applelogo.png',
+                          ),
+                          Image.asset(
+                            '/Users/mahamimran/project/assets/googlelogo.png',
+                          ),
+                          Image.asset(
+                            '/Users/mahamimran/project/assets/facebooklogo.png',
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                Positioned(
-                  top: 660,
-                  left: 50,
-                  //right: 0,
-                  child: Image.file(
-                    key: Key("GoogleLogoKey"),
-                    File("/Users/mahamimran/project/assets/applelogo.png"),
-                  ),
-                ),
-                Positioned(
-                  top: 660,
-                  left: 250,
-                  //right: 0,
-                  child: Image.file(
-                    key: Key("FacebookLogoKey"),
-                    File("/Users/mahamimran/project/assets/facebooklogo.png"),
-                  ),
-                ),
-
                 // add more code here:
-
                 Container(),
                 // stack requires empty non positioned widget to work properly.
               ],

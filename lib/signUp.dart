@@ -27,7 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
               children: [
                 // "Hi there!"
                 Positioned(
-                  top: 142,
+                  top: MediaQuery.of(context).size.height * 0.1 + 55,
                   left: 0,
                   right: 0,
                   child: Text(
@@ -36,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 26,
+                      fontSize: MediaQuery.of(context).size.width * 0.075,
                       fontWeight: FontWeight.w700,
                       // w100 is thin w900 is fat
                       fontFamily: "Cupertino",
@@ -357,5 +357,4 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
-
 
