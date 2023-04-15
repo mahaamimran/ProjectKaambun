@@ -12,6 +12,8 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -74,16 +76,27 @@ class _SignInPageState extends State<SignInPage> {
                       color: Color(0xff393c41),
                       borderRadius: BorderRadius.circular(10),
                     ),
+                    child: TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter username',
+                        contentPadding: EdgeInsets.only(left: 20, bottom: 11, top: 23, right: 15),
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                      // input white 
+                      style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                    ),
                   ),
                 ),
 
                 // password dabba
-                Positioned(
+                  Positioned(
                   left: MediaQuery.of(context).size.width * 0.005,
                   right: MediaQuery.of(context).size.width * 0.005,
                   top: MediaQuery.of(context).size.height * 0.427,
                   child: Container(
-                    key: Key("usernamedabba"),
+                    key: Key("passworddabba"),
                     // dabba dimentions
                     width: MediaQuery.of(context).size.width * 0.9,
                     height: MediaQuery.of(context).size.height * 0.068,
@@ -91,39 +104,17 @@ class _SignInPageState extends State<SignInPage> {
                       color: Color(0xff393c41),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                  ),
-                ),
-
-                // username text
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.36,
-                  left: MediaQuery.of(context).size.width * 0.05,
-                  right: 0,
-                  child: Text(
-                    "Enter Username",
-                    key: Key("enterusernamekey"),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.height * 0.014,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
-                    ),
-                  ),
-                ),
-
-                // password text
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.453,
-                  left: MediaQuery.of(context).size.width * 0.05,
-                  right: 0,
-                  child: Text(
-                    "Password",
-                    key: Key("passwordkey"),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.height * 0.014,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
+                    child: TextField(
+                      obscureText: true,
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter Password',
+                        contentPadding: EdgeInsets.only(left: 20, bottom: 11, top: 23, right: 15),
+                        hintStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                      // input white 
+                      style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                   ),
                 ),
@@ -306,7 +297,8 @@ class _SignInPageState extends State<SignInPage> {
 
                 // logos
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.83, // adjust as needed
+                  height: MediaQuery.of(context).size.height *
+                      0.83, // adjust as needed
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
