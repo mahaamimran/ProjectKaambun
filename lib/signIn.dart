@@ -90,7 +90,10 @@ class _SignInPageState extends State<SignInPage> {
                         border: InputBorder.none,
                         hintText: 'Enter username',
                         contentPadding: EdgeInsets.only(
-                            left: 20, bottom: 11, top: 23, right: 15),
+                            left: MediaQuery.of(context).size.width * 0.04,
+                            bottom: MediaQuery.of(context).size.width * 0.035,
+                            top: MediaQuery.of(context).size.width * 0.053,
+                            right: MediaQuery.of(context).size.width * 0.03),
                         hintStyle: TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255)),
                       ),
@@ -122,7 +125,10 @@ class _SignInPageState extends State<SignInPage> {
                         border: InputBorder.none,
                         hintText: 'Enter Password',
                         contentPadding: EdgeInsets.only(
-                            left: 20, bottom: 11, top: 23, right: 15),
+                            left: MediaQuery.of(context).size.width * 0.04,
+                            bottom: MediaQuery.of(context).size.width * 0.035,
+                            top: MediaQuery.of(context).size.width * 0.053,
+                            right: MediaQuery.of(context).size.width * 0.03),
                         hintStyle: TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255)),
                       ),
@@ -152,9 +158,13 @@ class _SignInPageState extends State<SignInPage> {
                             _hidePassword = !_hidePassword;
                           });
                         },
-                        child: Image.file(
-                          File('/Users/mahamimran/project/assets/eyeicon.png'),
+                        child: Image.asset(
+                          _isEyeIconPressed
+                              ? '/Users/mahamimran/project/assets/openeyeicon.png'
+                              : '/Users/mahamimran/project/assets/eyeicon.png',
                           key: Key('eyeIconKey'),
+                          width: MediaQuery.of(context).size.width * 0.05,
+                          height: MediaQuery.of(context).size.height * 0.05,
                           color: _isEyeIconPressed
                               ? Color.fromRGBO(203, 124, 229, 1)
                               : null,
@@ -357,28 +367,30 @@ class _SignInPageState extends State<SignInPage> {
                 ),
 
                 // logos
-                SizedBox(
-                  height: MediaQuery.of(context).size.height *
-                      0.83, // adjust as needed
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Row(
-                        key: Key("LogosKey"),
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset(
-                            '/Users/mahamimran/project/assets/applelogo.png',
-                          ),
-                          Image.asset(
-                            '/Users/mahamimran/project/assets/googlelogo.png',
-                          ),
-                          Image.asset(
-                            '/Users/mahamimran/project/assets/facebooklogo.png',
-                          ),
-                        ],
-                      ),
-                    ],
+                Positioned(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height *
+                        0.83, // adjust as needed
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Row(
+                          key: Key("LogosKey"),
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                              '/Users/mahamimran/project/assets/applelogo.png',
+                            ),
+                            Image.asset(
+                              '/Users/mahamimran/project/assets/googlelogo.png',
+                            ),
+                            Image.asset(
+                              '/Users/mahamimran/project/assets/facebooklogo.png',
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 // add more code here:
