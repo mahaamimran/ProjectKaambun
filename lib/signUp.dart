@@ -1,9 +1,10 @@
 // ignore_for_file: use_key_in_widget_constructors, unnecessary_import, prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, file_names
-
 import 'dart:ui';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:project/home.dart';
+import 'package:project/signIn.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -13,6 +14,14 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  // username and password input controllers
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  // sign in button pressed
+  bool _isSignInPressed = false;
+  bool _isSignUpPressed = false;
+  bool _hidePassword = true;
+  bool _isEyeIconPressed = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,20 +34,18 @@ class _SignUpPageState extends State<SignUpPage> {
             padding: EdgeInsets.all(10.0),
             child: Stack(
               children: [
-                // "Hi there!"
+                // "Hi There!"
                 Positioned(
-                  top: MediaQuery.of(context).size.height * 0.1 + 55,
+                  top: MediaQuery.of(context).size.height * 0.165,
                   left: 0,
                   right: 0,
                   child: Text(
-                    "Hi there!",
-                    key: Key("hitherekey"),
+                    "Hi There!",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: MediaQuery.of(context).size.width * 0.075,
                       fontWeight: FontWeight.w700,
-                      // w100 is thin w900 is fat
                       fontFamily: "Cupertino",
                       letterSpacing: 0,
                     ),
@@ -47,16 +54,16 @@ class _SignUpPageState extends State<SignUpPage> {
 
                 // "welcome to kaamBun"
                 Positioned(
-                  top: 180,
+                  top: MediaQuery.of(context).size.height * 0.21,
                   left: 0,
                   right: 0,
                   child: Text(
-                    "welcome to kaamBun.",
+                    "welcome to kaamBun",
                     key: Key("welcometokaambunkey"),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 14,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       fontFamily: "Cupertino",
                       letterSpacing: 0,
                     ),
@@ -65,68 +72,69 @@ class _SignUpPageState extends State<SignUpPage> {
 
                 // username dabba
                 Positioned(
-                  left: 0,
-                  right: 0,
-                  top: 286,
+                  left: MediaQuery.of(context).size.width * 0.005,
+                  right: MediaQuery.of(context).size.width * 0.005,
+                  top: MediaQuery.of(context).size.height * 0.334,
                   child: Container(
                     key: Key("usernamedabba"),
                     // dabba dimentions
-                    width: 343,
-                    height: 56,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.068,
                     decoration: BoxDecoration(
                       color: Color(0xff393c41),
                       borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter a username',
+                        contentPadding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.04,
+                            bottom: MediaQuery.of(context).size.width * 0.035,
+                            top: MediaQuery.of(context).size.width * 0.053,
+                            right: MediaQuery.of(context).size.width * 0.03),
+                        hintStyle: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                      // input white
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                   ),
                 ),
 
                 // password dabba
                 Positioned(
-                  left: 0,
-                  right: 0,
-                  top: 366,
+                  left: MediaQuery.of(context).size.width * 0.005,
+                  right: MediaQuery.of(context).size.width * 0.005,
+                  top: MediaQuery.of(context).size.height * 0.427,
                   child: Container(
-                    key: Key("usernamedabba"),
+                    key: Key("passworddabba"),
                     // dabba dimentions
-                    width: 343,
-                    height: 56,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.068,
                     decoration: BoxDecoration(
                       color: Color(0xff393c41),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                  ),
-                ),
-
-                // username text
-                Positioned(
-                  top: 307,
-                  left: 28,
-                  right: 0,
-                  child: Text(
-                    "Enter Username",
-                    key: Key("enterusernamekey"),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
-                    ),
-                  ),
-                ),
-
-                // password text
-                Positioned(
-                  top: 386,
-                  left: 28,
-                  right: 0,
-                  child: Text(
-                    "Password",
-                    key: Key("passwordkey"),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
+                    child: TextField(
+                      obscureText: _hidePassword,
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Enter Password',
+                        contentPadding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.04,
+                            bottom: MediaQuery.of(context).size.width * 0.035,
+                            top: MediaQuery.of(context).size.width * 0.053,
+                            right: MediaQuery.of(context).size.width * 0.03),
+                        hintStyle: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                      // input white
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                   ),
                 ),
@@ -134,105 +142,119 @@ class _SignUpPageState extends State<SignUpPage> {
                 // eye icon
                 Positioned(
                   // placement
-                  top: 386,
-                  left: 330,
-                  // dimentions
-                  width: 18,
-                  height: 17,
-                  child: Image.file(
-                    width: 16.62,
-                    height: 32,
-                    File('/Users/mahamimran/project/assets/eyeicon.png'),
-                    key: Key('eyeIconKey'),
+                  top: MediaQuery.of(context).size.height * 0.45,
+                  left: MediaQuery.of(context).size.width * 0.86,
+                  // dimensions
+                  width: MediaQuery.of(context).size.width * 0.05,
+                  height: MediaQuery.of(context).size.height * 0.03,
+                  child: Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          // ignore: avoid_print
+                          print("Eye icon pressed");
+                          setState(() {
+                            _isEyeIconPressed = !_isEyeIconPressed;
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                        child: Image.asset(
+                          _isEyeIconPressed
+                              ? '/Users/mahamimran/project/assets/openeyeicon.png'
+                              : '/Users/mahamimran/project/assets/eyeicon.png',
+                          key: Key('eyeIconKey'),
+                          width: MediaQuery.of(context).size.width * 0.05,
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          color: _isEyeIconPressed
+                              ? Color.fromRGBO(203, 124, 229, 1)
+                              : null,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
-                // Sign in button
+                // sign in button
                 Positioned(
-                  left: 16,
-                  top: 469,
-                  child: Container(
-                    width: 343,
-                    height: 56,
-                    child: Row(
-                      key: Key("SignInButtonKey"),
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Sign in",
-                          key: Key("SignInButtonTextKey"),
-                          textAlign: TextAlign.center,
+                  left: MediaQuery.of(context).size.width * 0.02,
+                  right: MediaQuery.of(context).size.width * 0.02,
+                  top: MediaQuery.of(context).size.height * 0.555,
+                  child: GestureDetector(
+                    onTapDown: (_) => setState(() => _isSignInPressed = true),
+                    onTapUp: (_) => setState(() => _isSignInPressed = false),
+                    onTapCancel: () => setState(() => _isSignInPressed = false),
+                    onTap: () {
+                      // ignore: avoid_print
+                      print("Sign Up button pressed");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                    },
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: _isSignInPressed
+                                ? Colors.white
+                                : Color(0x3d9471cf),
+                            offset: Offset(0, 4),
+                            blurRadius: _isSignInPressed ? 24 : 16,
+                          ),
+                        ],
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: _isSignInPressed
+                              ? [
+                                  Color(0xff6e54f7),
+                                  Color(0xffc847f4),
+                                ]
+                              : [
+                                  Color(0xffc847f4),
+                                  Color(0xff6e54f7),
+                                ],
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Sign up",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: MediaQuery.of(context).size.width * 0.04,
                             fontFamily: "Cupertino",
                             letterSpacing: 0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ],
-                    ),
-                    // padding around sign in button
-                    padding: EdgeInsets.only(
-                      left: 112,
-                      right: 112,
-                      top: 18,
-                      bottom: 18,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x3d9471cf),
-                          offset: Offset(0, 4),
-                          blurRadius: 16,
-                        ),
-                      ],
-                      // gradient
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xffc847f4),
-                          Color(0xff6e54f7),
-                        ],
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.1,
+                        vertical: MediaQuery.of(context).size.height * 0.02,
                       ),
                     ),
                   ),
                 ),
 
-                 // By signing up you agree to Terms & Conditions
+                // lines
                 Positioned(
                   left: 0,
                   right: 0,
-                  top: 540,
-                  child: Text(
-                    "(By signing up you agree to Terms & Conditions)",
-                    key: Key("t&ckey"),
-                    
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-
-                // lines
-                Positioned(
-                  left: 34,
-                  top: 627,
+                  top: MediaQuery.of(context).size.height * 0.737,
                   child: Container(
-                    width: 308,
-                    height: 20,
+                    width: MediaQuery.of(context).size.width * 0.67,
+                    height: MediaQuery.of(context).size.height * 0.025,
                     padding: EdgeInsets.symmetric(),
                     child: Row(
                       key: Key("LinesKey"),
                       children: [
                         Container(
                           key: Key("Line1Key"),
-                          width: 125,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           height: 0,
                           decoration: BoxDecoration(
                             border: Border(
@@ -244,11 +266,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                         SizedBox(
-                          width: 55,
+                          width: MediaQuery.of(context).size.width * 0.15,
                         ),
                         Container(
                           key: Key("Line2Key"),
-                          width: 125,
+                          width: MediaQuery.of(context).size.width * 0.3,
                           height: 0,
                           decoration: BoxDecoration(
                             border: Border(
@@ -267,7 +289,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                 // OR
                 Positioned(
-                  top: 629,
+                  top: MediaQuery.of(context).size.height * 0.74,
                   left: 0,
                   right: 0,
                   child: Text(
@@ -283,9 +305,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
 
-                 // "Already have an account? sign in"
+                // "Already have an account? Log in"
                 Positioned(
-                  top: 767,
+                  top: MediaQuery.of(context).size.height * 0.93,
                   left: 0,
                   right: 0,
                   child: RichText(
@@ -303,11 +325,41 @@ class _SignUpPageState extends State<SignUpPage> {
                           style: TextStyle(
                             color: Color.fromRGBO(203, 124, 229, 1),
                             fontWeight: FontWeight.bold,
+                            decoration: _isSignUpPressed
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                            // Add a glow effect
+                            shadows: _isSignUpPressed
+                                ? [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(203, 124, 229, 0.8),
+                                      blurRadius: 16,
+                                      spreadRadius: 4,
+                                    ),
+                                  ]
+                                : [],
                           ),
-                         recognizer: TapGestureRecognizer()
-                         ..onTap=() {
-                           //print('object');
-                         }
+                          recognizer: TapGestureRecognizer()
+                            ..onTapDown = (_) {
+                              setState(() {
+                                _isSignUpPressed = true;
+                              });
+                            }
+                            ..onTapUp = (_) {
+                              setState(() {
+                                _isSignUpPressed = false;
+                              });
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignInPage()),
+                              );
+                            }
+                            ..onTapCancel = () {
+                              setState(() {
+                                _isSignUpPressed = false;
+                              });
+                            },
                         ),
                       ],
                     ),
@@ -316,36 +368,51 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
 
                 // logos
-               Positioned(
-                  top: 660,
-                  left: 150,
-                  //right: 0,
-                  child: Image.file(
-                    key: Key("AppleLogoKey"),
-                    File("/Users/mahamimran/project/assets/googlelogo.png"),
-                  ),
-                ),
                 Positioned(
-                  top: 660,
-                  left: 50,
-                  //right: 0,
-                  child: Image.file(
-                    key: Key("GoogleLogoKey"),
-                    File("/Users/mahamimran/project/assets/applelogo.png"),
-                  ),
-                ),
-                 Positioned(
-                  top: 660,
-                  left: 250,
-                  //right: 0,
-                  child: Image.file(
-                    key: Key("FacebookLogoKey"),
-                    File("/Users/mahamimran/project/assets/facebooklogo.png"),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height *
+                        0.83, // adjust as needed
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Row(
+                          key: Key("LogosKey"),
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                              '/Users/mahamimran/project/assets/applelogo.png',
+                            ),
+                            Image.asset(
+                              '/Users/mahamimran/project/assets/googlelogo.png',
+                            ),
+                            Image.asset(
+                              '/Users/mahamimran/project/assets/facebooklogo.png',
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
 
+                // By signing up you agree to Terms & Conditions
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: MediaQuery.of(context).size.height * 0.64,
+                  child: Text(
+                    "By signing up you agree to Terms & Conditions",
+                    key: Key("t&ckey"),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontFamily: "Cupertino",
+                      letterSpacing: 0,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
                 // add more code here:
-
                 Container(),
                 // stack requires empty non positioned widget to work properly.
               ],
@@ -357,4 +424,3 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
-

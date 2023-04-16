@@ -228,6 +228,7 @@ class _SignInPageState extends State<SignInPage> {
                             fontSize: MediaQuery.of(context).size.width * 0.04,
                             fontFamily: "Cupertino",
                             letterSpacing: 0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -391,6 +392,24 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ],
                     ),
+                  ),
+                ),
+
+                 // Forgot Password?
+                Positioned(
+                  left: MediaQuery.of(context).size.width * 0.67,
+                  right: 0,
+                  top: MediaQuery.of(context).size.height * 0.51,
+                  child: Text(
+                    "Forgot Password?",
+                    key: Key("forgotpasswordkey"),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontFamily: "Cupertino",
+                      letterSpacing: 0,
+                    ),
+                   
                   ),
                 ),
                 // add more code here:

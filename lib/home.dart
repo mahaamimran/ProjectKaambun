@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
+  bool _HomeIconClicked = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,64 +47,55 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
-                // navigation bar
+                // bottom bar
                 Positioned(
+                  bottom: 0,
                   left: 0,
                   right: 0,
-                  top: 650,
-                  bottom: 0,
-                  child: Container(
-                    key: Key("navigationbarKey"),
-                    // navigationbar
-                    width: null,
-                    height: null,
-                    decoration: BoxDecoration(
-                      color: Color(0xff212327),
-                      borderRadius: BorderRadius.circular(0),
-                    ),
+                  child: BottomNavigationBar(
+                    backgroundColor: Color(0xff212327),
+                    type: BottomNavigationBarType.fixed,
+                    currentIndex: currentIndex,
+                    onTap: (int index) {
+                      setState(() {
+                        currentIndex = index;
+                        if (currentIndex == 0) {
+                          _HomeIconClicked = true;
+                        } else {
+                          _HomeIconClicked = false;
+                        }
+                      });
+                    },
+                    selectedItemColor: Color(0xff6e54f7),
+                    unselectedItemColor: Colors.white,
+                    items: [
+                      BottomNavigationBarItem(
+                        icon: Image.asset(
+                            color: _HomeIconClicked
+                                ? Color(0xff6e54f7)
+                                : Colors.white,
+                            '/Users/mahamimran/project/assets/eyeicon.png',
+                            width: 20,
+                            height: 20),
+                        label: "Home",
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.search),
+                        label: "Search",
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.add),
+                        label: "Add",
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.person),
+                        label: "Profile",
+                      ),
+                    ],
                   ),
                 ),
 
                 // navigation bar items
-                
-                // home logo
-                Positioned(
-                  top: 675,
-                  left: 50,
-                  child: Image.file(
-                    key: Key("item1"),
-                    File("/Users/mahamimran/project/assets/Navigation Bar/homepurple.png"),
-                  ),
-                ),
-
-                Positioned(
-                  top: 675,
-                  left: 140,
-                  child: Image.file(
-                    key: Key("item2"),
-                    File("/Users/mahamimran/project/assets/Navigation Bar/goalswhite.png"),
-                  ),
-                ),
-
-                Positioned(
-                  top: 675,
-                  right: 140,
-                  child: Image.file(
-                    key: Key("item3"),
-                    File("/Users/mahamimran/project/assets/Navigation Bar/taskalarmswhite.png"),
-                  ),
-                ),
-
-                Positioned(
-                  top: 675,
-                  right: 50,
-                  child: Image.file(
-                    key: Key("item4"),
-                    File("/Users/mahamimran/project/assets/Navigation Bar/profilewhite.png"),
-                  ),
-                ),
-
-
 
                 Container(),
                 // stack requires empty non positioned widget to work properly.
