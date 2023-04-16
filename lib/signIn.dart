@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:project/home.dart';
+import 'package:project/signUp.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -12,8 +14,14 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  // username and password input controllers
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  // sign in button pressed
+  bool _isSignInPressed = false;
+  bool _isSignUpPressed = false;
+  bool _hidePassword = true;
+  bool _isEyeIconPressed = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -81,17 +89,20 @@ class _SignInPageState extends State<SignInPage> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Enter username',
-                        contentPadding: EdgeInsets.only(left: 20, bottom: 11, top: 23, right: 15),
-                        hintStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                        contentPadding: EdgeInsets.only(
+                            left: 20, bottom: 11, top: 23, right: 15),
+                        hintStyle: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
                       ),
-                      // input white 
-                      style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                      // input white
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                   ),
                 ),
 
                 // password dabba
-                  Positioned(
+                Positioned(
                   left: MediaQuery.of(context).size.width * 0.005,
                   right: MediaQuery.of(context).size.width * 0.005,
                   top: MediaQuery.of(context).size.height * 0.427,
@@ -105,16 +116,19 @@ class _SignInPageState extends State<SignInPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextField(
-                      obscureText: true,
+                      obscureText: _hidePassword,
                       controller: passwordController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Enter Password',
-                        contentPadding: EdgeInsets.only(left: 20, bottom: 11, top: 23, right: 15),
-                        hintStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                        contentPadding: EdgeInsets.only(
+                            left: 20, bottom: 11, top: 23, right: 15),
+                        hintStyle: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
                       ),
-                      // input white 
-                      style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                      // input white
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                   ),
                 ),
@@ -127,9 +141,26 @@ class _SignInPageState extends State<SignInPage> {
                   // dimensions
                   width: MediaQuery.of(context).size.width * 0.05,
                   height: MediaQuery.of(context).size.height * 0.03,
-                  child: Image.file(
-                    File('/Users/mahamimran/project/assets/eyeicon.png'),
-                    key: Key('eyeIconKey'),
+                  child: Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          // ignore: avoid_print
+                          print("Eye icon pressed");
+                          setState(() {
+                            _isEyeIconPressed = !_isEyeIconPressed;
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                        child: Image.file(
+                          File('/Users/mahamimran/project/assets/eyeicon.png'),
+                          key: Key('eyeIconKey'),
+                          color: _isEyeIconPressed
+                              ? Color.fromRGBO(203, 124, 229, 1)
+                              : null,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 
@@ -138,17 +169,50 @@ class _SignInPageState extends State<SignInPage> {
                   left: MediaQuery.of(context).size.width * 0.02,
                   right: MediaQuery.of(context).size.width * 0.02,
                   top: MediaQuery.of(context).size.height * 0.555,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    child: Row(
-                      key: Key("SignInButtonKey"),
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
+                  child: GestureDetector(
+                    onTapDown: (_) => setState(() => _isSignInPressed = true),
+                    onTapUp: (_) => setState(() => _isSignInPressed = false),
+                    onTapCancel: () => setState(() => _isSignInPressed = false),
+                    onTap: () {
+                      // ignore: avoid_print
+                      print("Sign in button pressed");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                    },
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: _isSignInPressed
+                                ? Colors.white
+                                : Color(0x3d9471cf),
+                            offset: Offset(0, 4),
+                            blurRadius: _isSignInPressed ? 24 : 16,
+                          ),
+                        ],
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: _isSignInPressed
+                              ? [
+                                  Color(0xff6e54f7),
+                                  Color(0xffc847f4),
+                                ]
+                              : [
+                                  Color(0xffc847f4),
+                                  Color(0xff6e54f7),
+                                ],
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
                           "Sign in",
-                          key: Key("SignInButtonTextKey"),
-                          textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: MediaQuery.of(context).size.width * 0.04,
@@ -156,49 +220,12 @@ class _SignInPageState extends State<SignInPage> {
                             letterSpacing: 0,
                           ),
                         ),
-                      ],
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.1,
-                      vertical: MediaQuery.of(context).size.height * 0.02,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x3d9471cf),
-                          offset: Offset(0, 4),
-                          blurRadius: 16,
-                        ),
-                      ],
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xffc847f4),
-                          Color(0xff6e54f7),
-                        ],
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.1,
+                        vertical: MediaQuery.of(context).size.height * 0.02,
                       ),
                     ),
-                  ),
-                ),
-
-                // forgot password
-                Positioned(
-                  left: MediaQuery.of(context).size.width * 0.67,
-                  top: MediaQuery.of(context).size.height * 0.51,
-                  child: Text(
-                    "Forgot Password?",
-                    key: Key(
-                      "forgptPasswordkey",
-                    ),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.03,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
-                    ),
-                    textAlign: TextAlign.center,
                   ),
                 ),
 
@@ -267,7 +294,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ),
 
-                // "dont have an account? sign up"
+                // "dont have an account? sign up
                 Positioned(
                   top: MediaQuery.of(context).size.height * 0.93,
                   left: 0,
@@ -287,7 +314,41 @@ class _SignInPageState extends State<SignInPage> {
                           style: TextStyle(
                             color: Color.fromRGBO(203, 124, 229, 1),
                             fontWeight: FontWeight.bold,
+                            decoration: _isSignUpPressed
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                            // Add a glow effect
+                            shadows: _isSignUpPressed
+                                ? [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(203, 124, 229, 0.8),
+                                      blurRadius: 16,
+                                      spreadRadius: 4,
+                                    ),
+                                  ]
+                                : [],
                           ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTapDown = (_) {
+                              setState(() {
+                                _isSignUpPressed = true;
+                              });
+                            }
+                            ..onTapUp = (_) {
+                              setState(() {
+                                _isSignUpPressed = false;
+                              });
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpPage()),
+                              );
+                            }
+                            ..onTapCancel = () {
+                              setState(() {
+                                _isSignUpPressed = false;
+                              });
+                            },
                         ),
                       ],
                     ),
