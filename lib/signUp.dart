@@ -40,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   left: 0,
                   right: 0,
                   child: Text(
-                    "Hi There!",
+                    "Hi there!",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -88,7 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: nameController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Enter a username',
+                        hintText: 'Create a username',
                         contentPadding: EdgeInsets.only(
                             left: MediaQuery.of(context).size.width * 0.04,
                             bottom: MediaQuery.of(context).size.width * 0.035,
@@ -123,7 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: passwordController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Enter Password',
+                        hintText: 'Create a Password',
                         contentPadding: EdgeInsets.only(
                             left: MediaQuery.of(context).size.width * 0.04,
                             bottom: MediaQuery.of(context).size.width * 0.035,

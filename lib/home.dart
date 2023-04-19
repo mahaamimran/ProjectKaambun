@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,93 +13,396 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  bool _HomeIconClicked = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Builder(builder: (BuildContext context) {
         return Scaffold(
+          // background color
+          backgroundColor: Colors.amber,
           // top bar
           appBar: AppBar(
-            title: Text("Home"),
+            title: Text(
+              "Home",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: MediaQuery.of(context).size.width * 0.055,
+              ),
+            ),
             backgroundColor: Color(0xff212327),
           ),
 
+          // everything other than the app bar
           body: Container(
             // background color
-            color: Colors.white,
-            // padding around borders
-            padding: EdgeInsets.all(0),
+            color: Color(0xff212327),
+
             child: Stack(
               children: [
-                Positioned(
-                  top: 300,
-                  left: 0,
-                  right: 0,
-                  child: Text(
-                    "hello",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
-                    ),
-                    textAlign: TextAlign.center,
+                // scrollable stuff
+
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: ListView(
+                    children: [
+                      // space
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.016,
+                      ),
+
+                      // motvational quote container
+                      Container(
+                        padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.width * 0.05),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Highlights",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.06,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            // space bewteen text and container
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.012,
+                            ),
+                            Text(
+                              "today is not your day. try again tomorrow.",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.045,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.005,
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                "- Maham",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        // padding for container
+                        height: MediaQuery.of(context).size.height * 0.17,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color(0xffc847f4),
+                              Color(0xff6e54f7),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      // space between highlights & goal tracking
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.015),
+
+                      // goal tracking
+                      Row(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                              '/Users/mahamimran/project/assets/goaltracking.png'),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.02,
+                          ),
+                          Text(
+                            "My Stats",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.06,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // space
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
+                      ),
+
+                      // container for goal tracking
+                      Container(
+                        padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.width * 0.05),
+                        height: MediaQuery.of(context).size.height * 0.34,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(57, 111, 113, 135),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      "Today",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 189, 123, 210),
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      "05:30 AM",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 189, 123, 210),
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                // sized box
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.1,
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      "Alarm",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    Text(
+                                      "06:30 AM",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.1,
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      "Snoozed",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 189, 123, 210),
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    Text(
+                                      "25 times",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 189, 123, 210),
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.04,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                //add more code
+                              ],
+                            ),
+
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
+                            ),
+
+                            // graph
+                            Transform.scale(
+                              scale: MediaQuery.of(context).size.width * 0.0029,
+                              child: Image.asset(
+                                '/Users/mahamimran/project/assets/graph.png',
+                                height:
+                                    MediaQuery.of(context).size.height * 0.19,
+                              ),
+                            ),
+
+                            Row(
+                              
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Sun",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                ),
+                                Text(
+                                  "Mon",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                ),
+                                Text(
+                                  "Tue",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                ),
+                                Text(
+                                  "Wed",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                ),
+                                Text(
+                                  "Thu",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                ),
+                                Text(
+                                  "Fri",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                ),
+                                Text(
+                                  "Sat",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                
+                              ],
+                              
+                            ),
+                            //  Text('Child 2'),
+                            // Text('Child 3'),
+                          ],
+                        ),
+                      ),
+                      // add more code here:
+                      //Text("hello"),
+                    ],
                   ),
                 ),
-
-                // bottom bar
+                // navigation bar
                 Positioned(
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  child: BottomNavigationBar(
+                  height: MediaQuery.of(context).size.height * 0.11,
+                  child: GNav(
+                    gap: MediaQuery.of(context).size.width * 0.05,
                     backgroundColor: Color(0xff212327),
-                    type: BottomNavigationBarType.fixed,
-                    currentIndex: currentIndex,
-                    onTap: (int index) {
-                      setState(() {
-                        currentIndex = index;
-                        if (currentIndex == 0) {
-                          _HomeIconClicked = true;
-                        } else {
-                          _HomeIconClicked = false;
-                        }
-                      });
-                    },
-                    selectedItemColor: Color(0xff6e54f7),
-                    unselectedItemColor: Colors.white,
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Image.asset(
-                            color: _HomeIconClicked
-                                ? Color(0xff6e54f7)
-                                : Colors.white,
-                            '/Users/mahamimran/project/assets/eyeicon.png',
-                            width: 20,
-                            height: 20),
-                        label: "Home",
+                    color: Colors.white,
+                    activeColor: Color.fromARGB(255, 189, 123, 210),
+                    iconSize: MediaQuery.of(context).size.width * 0.074,
+                    tabs: [
+                      GButton(
+                        icon: Icons.home,
+                        text: 'Home',
                       ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.search),
-                        label: "Search",
+                      GButton(
+                        icon: Icons.favorite,
+                        text: 'Search',
                       ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.add),
-                        label: "Add",
+                      GButton(
+                        icon: Icons.add,
+                        text: 'Add',
                       ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.person),
-                        label: "Profile",
+                      GButton(
+                        icon: Icons.person,
+                        text: 'Profile',
                       ),
                     ],
                   ),
                 ),
-
-                // navigation bar items
-
-                Container(),
-                // stack requires empty non positioned widget to work properly.
               ],
             ),
           ),

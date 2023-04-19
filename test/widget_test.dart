@@ -7,6 +7,7 @@
 // ignore_for_file: prefer_const_constructors, unused_import
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:project/home.dart';
 import 'package:project/main.dart';
 import 'package:project/signIn.dart';
 import 'package:project/testwidget.dart';
@@ -15,7 +16,7 @@ import 'package:project/testwidget.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(HomePage());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
