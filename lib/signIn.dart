@@ -22,6 +22,21 @@ class _SignInPageState extends State<SignInPage> {
   bool _isSignUpPressed = false;
   bool _hidePassword = true;
   bool _isEyeIconPressed = false;
+  bool _userAuthentication = false;
+
+  void authenticateUser() {
+    if (nameController.text == "mahamimran" && passwordController.text == "12345678") {
+      _userAuthentication = true;
+      print("user authenticated");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } else {
+      print("invalid username or password");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -186,10 +201,12 @@ class _SignInPageState extends State<SignInPage> {
                     onTap: () {
                       // ignore: avoid_print
                       print("Sign in button pressed");
+                      if (_userAuthentication==true){
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => HomePage()),
                       );
+                      }
                     },
                     child: AnimatedContainer(
                       duration: Duration(milliseconds: 200),
