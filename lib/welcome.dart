@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'home.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -97,15 +98,29 @@ class _WelcomePageState extends State<WelcomePage> {
                   left: 0,
                   right: 0,
                   top: MediaQuery.of(context).size.height * 0.65,
-                  child: Container(
-                    key: Key("dabba1Key"),
-                    // dabba dimentions
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    height: MediaQuery.of(context).size.height * 0.066,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(77, 77, 77, 0.9),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                  child: Column(
+                    children: [
+                      Container(
+                        key: Key("dabba1Key"),
+                        // dabba dimentions
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        height: MediaQuery.of(context).size.height * 0.066,
+                        decoration: BoxDecoration(
+                          color: Color.fromRGBO(77, 77, 77, 0.9),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // add home screen here
+                          print('wake clicked');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
 
@@ -131,15 +146,29 @@ class _WelcomePageState extends State<WelcomePage> {
                   left: 0,
                   right: 0,
                   top: MediaQuery.of(context).size.height * 0.73,
-                  child: Container(
-                    key: Key("dabba2Key"),
-                    // dabba dimentions
-                   width: MediaQuery.of(context).size.width * 0.6,
-                    height: MediaQuery.of(context).size.height * 0.066,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(77, 77, 77, 0.9),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                  child: Column(
+                    children: [
+                      Container(
+                        key: Key("dabba2Key"),
+                        // dabba dimentions
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        height: MediaQuery.of(context).size.height * 0.066,
+                        decoration: BoxDecoration(
+                          color: Color.fromRGBO(77, 77, 77, 0.9),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // add home screen here
+                          print('organised clicked');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
 
@@ -160,21 +189,34 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                 ),
 
-
                 // dabba3
                 Positioned(
                   left: 0,
                   right: 0,
                   top: MediaQuery.of(context).size.height * 0.81,
-                  child: Container(
-                    key: Key("dabba3Key"),
-                    // dabba dimentions
-                     width: MediaQuery.of(context).size.width * 0.6,
-                    height: MediaQuery.of(context).size.height * 0.066,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(77, 77, 77, 0.9),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                  child: Column(
+                    children: [
+                      Container(
+                        key: Key("dabba3Key"),
+                        // dabba dimentions
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        height: MediaQuery.of(context).size.height * 0.066,
+                        decoration: BoxDecoration(
+                          color: Color.fromRGBO(77, 77, 77, 0.9),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // add home screen here
+                          print('productive clicked');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
 
@@ -194,8 +236,6 @@ class _WelcomePageState extends State<WelcomePage> {
                     ),
                   ),
                 ),
-
-                
 
                 Container(),
                 // stack requires empty non positioned widget to work properly.
