@@ -129,15 +129,28 @@ class _WelcomePageState extends State<WelcomePage> {
                   top: MediaQuery.of(context).size.height * 0.672,
                   left: MediaQuery.of(context).size.width * 0.05,
                   right: 0,
-                  child: Text(
-                    "I want to wake up on time",
-                    key: Key("dabba1textKey"),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.042,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
-                    ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "I want to wake up on time",
+                        key: Key("dabba1textKey"),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.042,
+                          fontFamily: "Cupertino",
+                          letterSpacing: 0,
+                        ),
+                      ),
+                       GestureDetector(
+                        onTap: () {
+                          print('wake text');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
 
@@ -177,15 +190,24 @@ class _WelcomePageState extends State<WelcomePage> {
                   top: MediaQuery.of(context).size.height * 0.752,
                   left: MediaQuery.of(context).size.width * 0.05,
                   right: 0,
-                  child: Text(
-                    "I want to be more organised",
-                    key: Key("dabba2textKey"),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.042,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
-                    ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "I want to be more organised",
+                        key: Key("dabba2textKey"),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.042,
+                          fontFamily: "Cupertino",
+                          letterSpacing: 0,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          print('organised text');
+                        },
+                      ),
+                    ],
                   ),
                 ),
 
@@ -225,15 +247,28 @@ class _WelcomePageState extends State<WelcomePage> {
                   top: MediaQuery.of(context).size.height * 0.831,
                   left: MediaQuery.of(context).size.width * 0.05,
                   right: 0,
-                  child: Text(
-                    "I want to be more productive",
-                    key: Key("dabba3textKey"),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.042,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
-                    ),
+                  child: Column(
+                    children: [
+                      Text(
+                        "I want to be more productive",
+                        key: Key("dabba3textKey"),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.042,
+                          fontFamily: "Cupertino",
+                          letterSpacing: 0,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          print('productive text clicked');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
 
