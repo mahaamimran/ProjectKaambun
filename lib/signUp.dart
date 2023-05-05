@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:project/home.dart';
 import 'package:project/signIn.dart';
+import 'package:project/welcome.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -188,7 +189,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       print("Sign Up button pressed");
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => WelcomePage()),
                       );
                     },
                     child: AnimatedContainer(

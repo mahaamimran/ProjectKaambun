@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:project/home.dart';
 import 'package:project/signUp.dart';
+import 'package:project/welcome.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -22,20 +23,49 @@ class _SignInPageState extends State<SignInPage> {
   bool _isSignUpPressed = false;
   bool _hidePassword = true;
   bool _isEyeIconPressed = false;
-  bool _userAuthentication = false;
-
-  void authenticateUser() {
-    if (nameController.text == "mahamimran" && passwordController.text == "12345678") {
-      _userAuthentication = true;
-      print("user authenticated");
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
-    } else {
-      print("invalid username or password");
-    }
+ void authenticateUser(BuildContext context) {
+  if (nameController.text == "mahamimran" && passwordController.text == "12345678") {
+    print("user authenticated");
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
+  } 
+  else if(nameController.text == "mahamimran" && passwordController.text != "12345678"){
+    print("invalid password");
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Invalid password.'),
+      ),
+    );
   }
+  else if(nameController.text != "mahamimran" && passwordController.text == "12345678"){
+    print("invalid username");
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Invalid username.'),
+      ),
+    );
+  }
+  else if(nameController.text == "" && passwordController.text == ""){
+    print("Please fill in both the username and password fields.");
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('fill in both the username and password fields.'),
+      ),
+    );
+  }
+  
+  else {
+    print("invalid username and password");
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Invalid username and password.'),
+      ),
+    );
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -201,12 +231,10 @@ class _SignInPageState extends State<SignInPage> {
                     onTap: () {
                       // ignore: avoid_print
                       print("Sign in button pressed");
-                      if (_userAuthentication==true){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      );
-                      }
+                      print(nameController.text);
+                      print(passwordController.text);
+                      authenticateUser(context);
+      
                     },
                     child: AnimatedContainer(
                       duration: Duration(milliseconds: 200),

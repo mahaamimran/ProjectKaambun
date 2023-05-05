@@ -260,7 +260,6 @@ class _HomePageState extends State<HomePage> {
                             ),
 
                             Row(
-                              
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
@@ -357,9 +356,7 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                
                               ],
-                              
                             ),
                             //  Text('Child 2'),
                             // Text('Child 3'),
