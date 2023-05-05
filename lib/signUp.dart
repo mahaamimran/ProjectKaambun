@@ -23,6 +23,27 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isSignUpPressed = false;
   bool _hidePassword = true;
   bool _isEyeIconPressed = false;
+  
+void authenticateUser(BuildContext context) {
+  RegExp passwordRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  bool isPasswordStrong = passwordRegex.hasMatch(passwordController.text);
+if (isPasswordStrong) {
+ Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => WelcomePage()),
+    );
+  
+}
+else {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text("Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character"),
+      duration: Duration(seconds: 1),
+    ),
+  );
+}
+}
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -187,10 +208,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     onTap: () {
                       // ignore: avoid_print
                       print("Sign Up button pressed");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => WelcomePage()),
-                      );
+                      print(nameController.text);
+                      print(passwordController.text);
+                      authenticateUser(context);
                     },
                     child: AnimatedContainer(
                       duration: Duration(milliseconds: 200),
