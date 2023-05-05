@@ -26,23 +26,37 @@ class _SignUpPageState extends State<SignUpPage> {
   
 void authenticateUser(BuildContext context) {
   RegExp passwordRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-  bool isPasswordStrong = passwordRegex.hasMatch(passwordController.text);
-if (isPasswordStrong) {
- Navigator.push(
+  String message = "";
+
+  if (passwordController.text.isEmpty) {
+    message = "Please enter a password.";
+  } else if (passwordController.text.length < 8) {
+    message = "Password must be at least 8 characters long.";
+  } else if (!RegExp(r'[A-Z]').hasMatch(passwordController.text)) {
+    message = "Password must contain at least one uppercase letter.";
+  } else if (!RegExp(r'[a-z]').hasMatch(passwordController.text)) {
+    message = "Password must contain at least one lowercase letter.";
+  } else if (!RegExp(r'[0-9]').hasMatch(passwordController.text)) {
+    message = "Password must contain at least one digit.";
+  } else if (!RegExp(r'[!@#\$&*~]').hasMatch(passwordController.text)) {
+    message = "Password must contain at least one special character (!@#\$&*~).";
+  }
+
+  if (message.isNotEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  } else {
+    Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => WelcomePage()),
     );
-  
+  }
 }
-else {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text("Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character"),
-      duration: Duration(seconds: 1),
-    ),
-  );
-}
-}
+
 
   @override
   Widget build(BuildContext context) {
