@@ -28,7 +28,7 @@ class _SignInPageState extends State<SignInPage> {
     print("user authenticated");
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => WelcomePage()),
     );
   } 
   else if(nameController.text == "mahamimran" && passwordController.text != "12345678"){

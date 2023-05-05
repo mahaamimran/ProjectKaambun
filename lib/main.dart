@@ -10,5 +10,5 @@ import 'package:flutter/gestures.dart';
 import 'testwidget.dart';
 
 void main() {
-  runApp(SignInPage());
+  runApp(SignUpPage());
 }
