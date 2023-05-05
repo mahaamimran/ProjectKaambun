@@ -4,6 +4,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'AddTaskPage.dart';
+import 'ScheduledTasks.dart';
+import 'SettingsPage.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +17,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
+   final List<Widget> _screens = [    
+    HomePage(),    
+    AddTaskPage(),    
+    ScheduledTasks(),    
+    SettingsPage(),  
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -368,6 +378,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
+
                 // navigation bar
                 Positioned(
                   bottom: 0,
@@ -375,28 +386,29 @@ class _HomePageState extends State<HomePage> {
                   right: 0,
                   height: MediaQuery.of(context).size.height * 0.11,
                   child: GNav(
-                    gap: MediaQuery.of(context).size.width * 0.05,
+                    gap: MediaQuery.of(context).size.width * 0.045,
                     backgroundColor: Color(0xff212327),
                     color: Colors.white,
                     activeColor: Color.fromARGB(255, 189, 123, 210),
-                    iconSize: MediaQuery.of(context).size.width * 0.074,
+                    iconSize: MediaQuery.of(context).size.width * 0.07,
                     tabs: [
                       GButton(
                         icon: Icons.home,
                         text: 'Home',
                       ),
                       GButton(
-                        icon: Icons.favorite,
-                        text: 'Search',
-                      ),
-                      GButton(
                         icon: Icons.add,
                         text: 'Add',
                       ),
                       GButton(
-                        icon: Icons.person,
-                        text: 'Profile',
+                        icon: Icons.check_circle,
+                        text: 'Tasks',
                       ),
+                      GButton(
+                        icon: Icons.settings,
+                        text: 'Setting',
+                      ),
+                     
                     ],
                   ),
                 ),
