@@ -17,13 +17,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
- final List<Widget> _screens = [
-  HomePage(),
-  AddTaskPage(),
-  ScheduledTasks(),
-  SettingsPage(),
-];
-
+  final List<Widget> _screens = [
+    HomePage(),
+    AddTaskPage(),
+    ScheduledTasks(),
+    SettingsPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +46,9 @@ class _HomePageState extends State<HomePage> {
           // everything other than the app bar
           body: Stack(
             children: [
-             //_screens[_currentIndex],
-
+              //_screens[_currentIndex],
+              // fix this 😔
+            
               Container(
                 // background color
                 color: Color(0xff212327),
@@ -413,6 +413,7 @@ class _HomePageState extends State<HomePage> {
                         onTabChange: (index) {
                           setState(() {
                             _currentIndex = index;
+                            print(_currentIndex);
                           });
                         },
                         tabs: [
