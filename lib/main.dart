@@ -5,10 +5,13 @@ import 'signUp.dart';
 import 'signIn.dart';
 import 'welcome.dart';
 import 'home.dart';
+import 'AddTaskPage.dart';
+import 'ScheduledTasks.dart';
+import 'SettingsPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'testwidget.dart';
 
 void main() {
-  runApp(SignUpPage());
+  runApp(HomePage());
 }
