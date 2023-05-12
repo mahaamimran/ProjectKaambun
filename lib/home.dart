@@ -16,39 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-  final List<Widget> _screens = [
-    HomePage(),
-    AddTaskPage(),
-    ScheduledTasks(),
-    SettingsPage(),
-  ];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Builder(builder: (BuildContext context) {
         return Scaffold(
-          // background color
-          backgroundColor: Colors.amber,
-          // top bar
-          appBar: AppBar(
-            title: Text(
-              "Home",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: MediaQuery.of(context).size.width * 0.055,
-              ),
-            ),
-            backgroundColor: Color(0xff212327),
-          ),
-
-          // everything other than the app bar
           body: Stack(
             children: [
-              //_screens[_currentIndex],
-              // fix this 😔
-            
               Container(
                 // background color
                 color: Color(0xff212327),
@@ -56,16 +31,10 @@ class _HomePageState extends State<HomePage> {
                 child: Stack(
                   children: [
                     // scrollable stuff
-
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: ListView(
                         children: [
-                          // space
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.016,
-                          ),
-
                           // motvational quote container
                           Container(
                             padding: EdgeInsets.all(
@@ -393,46 +362,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                           // add more code here:
                           //Text("hello"),
-                        ],
-                      ),
-                    ),
-
-                    // navigation bar
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      height: MediaQuery.of(context).size.height * 0.11,
-                      child: GNav(
-                        gap: MediaQuery.of(context).size.width * 0.045,
-                        backgroundColor: Color(0xff212327),
-                        color: Colors.white,
-                        activeColor: Color.fromARGB(255, 189, 123, 210),
-                        iconSize: MediaQuery.of(context).size.width * 0.07,
-                        selectedIndex: _currentIndex,
-                        onTabChange: (index) {
-                          setState(() {
-                            _currentIndex = index;
-                            print(_currentIndex);
-                          });
-                        },
-                        tabs: [
-                          GButton(
-                            icon: Icons.home,
-                            text: 'Home',
-                          ),
-                          GButton(
-                            icon: Icons.add,
-                            text: 'Add',
-                          ),
-                          GButton(
-                            icon: Icons.check_circle,
-                            text: 'Tasks',
-                          ),
-                          GButton(
-                            icon: Icons.settings,
-                            text: 'Setting',
-                          ),
                         ],
                       ),
                     ),
