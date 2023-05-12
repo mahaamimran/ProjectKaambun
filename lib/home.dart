@@ -16,7 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -360,6 +359,51 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
+
+                          // space between graph and workout box
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.03,
+                          ),
+
+                          // workout box
+                          Center(
+                            child: Container(
+                              padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width * 0.05),
+                              height: MediaQuery.of(context).size.height * 0.09,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color.fromARGB(255, 199, 120, 226),
+                                    Color.fromARGB(255, 143, 127, 228),
+                                  ],
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    right: MediaQuery.of(context).size.width *
+                                        0.4
+                                    ), // Adjust the value as needed
+                                child: Center(
+                                  // inserting logo
+                                  child: Text(
+                                    "Workout",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.05,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+
                           // add more code here:
                           //Text("hello"),
                         ],
