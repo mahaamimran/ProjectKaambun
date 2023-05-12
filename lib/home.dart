@@ -31,7 +31,10 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     // scrollable stuff
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.03,
+                        vertical: 0
+                        ),
                       child: ListView(
                         children: [
                           // motvational quote container
@@ -382,14 +385,17 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                               ),
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    right: MediaQuery.of(context).size.width *
-                                        0.4
-                                    ), // Adjust the value as needed
-                                child: Center(
-                                  // inserting logo
-                                  child: Text(
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    '/Users/mahamimran/project/assets/workoutsparkle.png', // Replace with the path to your image file
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.05,
+                                  ),
+                                  SizedBox(width: MediaQuery.of(context).size.width * 0.04),
+                                  Text(
                                     "Workout",
                                     style: TextStyle(
                                       color: Colors.white,
@@ -399,7 +405,13 @@ class _HomePageState extends State<HomePage> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                ),
+                                  SizedBox(width: MediaQuery.of(context).size.width * 0.5),
+                                  Image.asset(
+                                    '/Users/mahamimran/project/assets/rightarrow.png',
+                                   
+                                        scale: MediaQuery.of(context).size.width * 0.0018,
+                                  ),
+                                ],
                               ),
                             ),
                           ),

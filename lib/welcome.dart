@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'home.dart';
+import 'AppSkeleton.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -116,7 +117,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           print('wake clicked');
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(builder: (context) => MainPage()),
                           );
                         },
                       ),
@@ -146,7 +147,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           print('wake text');
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(builder: (context) => MainPage()),
                           );
                         },
                       ),
@@ -177,7 +178,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           print('organised clicked');
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(builder: (context) => MainPage()),
                           );
                         },
                       ),
@@ -234,7 +235,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           print('productive clicked');
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(builder: (context) => MainPage()),
                           );
                         },
                       ),
@@ -264,7 +265,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           print('productive text clicked');
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(builder: (context) => MainPage()),
                           );
                         },
                       ),

@@ -29,7 +29,7 @@ class AppSkeleton extends StatefulWidget {
 }
 
 class _AppSkeletonState extends State<AppSkeleton> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   final List<Widget> _pages = [
     HomePage(),
@@ -40,7 +40,7 @@ class _AppSkeletonState extends State<AppSkeleton> {
 
   final List<String> _appBarTitles = [
     "Home",
-    "Add",
+    "Add Task",
     "Tasks",
     "Settings",
   ];
