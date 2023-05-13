@@ -217,35 +217,64 @@ class _AddTaskPageState extends State<AddTaskPage> {
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(16.0),
+              padding:
+                  EdgeInsets.all(MediaQuery.of(context).size.width * 0.001),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "something random",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.06,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  // repeat making it left
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.05,
+                      ),
+                      Text(
+                        "Repeat",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    "something random",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.06,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  // space between repeat and weekdays
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.02,
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    "something random",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.06,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  // weekdays
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      for (var weekday in [
+                        'Mon',
+                        'Tue',
+                        'Wed',
+                        'Thu',
+                        'Fri',
+                        'Sat',
+                        'Sun'
+                      ])
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(
+                                8.0), // Adjust the border radius as needed
+                          ),
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width *
+                                  0.02), // Adjust the padding as needed
+                          child: Text(
+                            weekday,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ],
               ),
