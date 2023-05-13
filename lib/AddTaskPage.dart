@@ -76,11 +76,13 @@ class AddTaskPage extends StatefulWidget {
 
 class _AddTaskPageState extends State<AddTaskPage> {
   TextEditingController taskNameController = TextEditingController();
+  TextEditingController subTaskNameController = TextEditingController();
   bool isEditing = false;
   Color penColor = Colors.white;
   int currentHour = 1;
   int currentMinute = 0;
   String currentAmPm = "AM";
+  double sliderValue = 0.0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   // snackbar
   void _showSnackBar(String message) {
@@ -254,7 +256,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                         ),
                         Transform.scale(
-                          scale: currentAmPm == "PM" ? 1.0 : 0.5,
+                          scale: currentAmPm == "PM" ? 1.5 : 0.6,
                           child: Opacity(
                             opacity: currentAmPm == "PM" ? 1.0 : 0.4,
                             child: Container(
@@ -282,8 +284,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
           ),
           Expanded(
             child: Container(
-              padding:
-                  EdgeInsets.all(MediaQuery.of(context).size.width * 0.001),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -291,7 +292,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   Row(
                     children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.04,
+                        width: MediaQuery.of(context).size.width * 0.02,
                       ),
                       Text(
                         "Repeat",
@@ -305,7 +306,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                   // space between repeat and weekdays
                   SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.02,
+                    height: MediaQuery.of(context).size.width * 0.03,
                   ),
                   // weekdays
                   Row(
@@ -323,12 +324,103 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         CustomButton(weekday),
                     ],
                   ),
+
+                  // space between weekdays and subtasks
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  // subtasks
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.02,
+                      ),
+                      Text(
+                        "Sub tasks",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  // none
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: subTaskNameController,
+                          enabled: isEditing,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'None',
+                            contentPadding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.02,
+                              right: MediaQuery.of(context).size.width * 0.02,
+                              top: MediaQuery.of(context).size.width * 0.02,
+                              bottom: MediaQuery.of(context).size.width * 0.02,
+                            ),
+                            hintStyle: TextStyle(
+                              color: isEditing ? Colors.white : Colors.grey,
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width * 0.04,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Cupertino",
+                            letterSpacing: 0,
+                          ),
+                        ),
+                      ),
+                      Image.asset(
+                        "/Users/mahamimran/project/assets/rightarrow.png",
+                        width: MediaQuery.of(context).size.width * 0.07,
+                        scale: 0.7,
+                      ),
+                    ],
+                  ),
+
+                  
+                  // length of task
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.02,
+                      ),
+                      Text(
+                        "Length of task",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.05,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+
+                      // add slider here for length of task
+                       Slider(
+            value: sliderValue,
+            min: 0.0,
+            max: 100.0,
+            onChanged: (newValue) {
+              setState(() {
+                sliderValue = newValue;
+              });
+            },
+          ),
+
+                      
+
+
+                      // add more code here:
+                    ],
+                  ),
                 ],
               ),
             ),
           ),
         ],
-        //g
       ),
     );
   }
