@@ -1,9 +1,66 @@
 // ignore: file_names
 // ignore_for_file: file_names, prefer_const_literals_to_create_immutables
-
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project/Hours.dart';
 import 'package:project/Minutes.dart';
+
+class CustomButton extends StatefulWidget {
+  final String weekday;
+
+  CustomButton(this.weekday);
+
+  @override
+  _CustomButtonState createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
+  bool isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isPressed = !isPressed;
+        });
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+          gradient: isPressed
+              ? LinearGradient(
+                  colors: [
+                    Color.fromRGBO(77, 77, 77, 0.9),
+                    Color.fromRGBO(77, 77, 77, 0.9),
+                  ],
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  stops: [0.0, 1.0],
+                )
+              : LinearGradient(
+                  colors: [
+                    Color(0xff6e54f7),
+                    Color(0xffc847f4),
+                  ],
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  stops: [0.0, 1.0],
+                ),
+        ),
+        padding: EdgeInsets.all(8.0),
+        child: Text(
+          widget.weekday,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: MediaQuery.of(context).size.width * 0.04,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class AddTaskPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -259,33 +316,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         'Sat',
                         'Sun'
                       ])
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                                8.0), // Adjust the border radius as needed
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xff6e54f7),
-                                Color(0xffc847f4),
-                              ],
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              stops: [0.0, 1.0],
-                            ),
-                          ),
-                          padding: EdgeInsets.all(
-                              MediaQuery.of(context).size.width *
-                                  0.02), // Adjust the padding as needed
-                          child: Text(
-                            weekday,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.04,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
+                        CustomButton(weekday),
                     ],
                   ),
                 ],
