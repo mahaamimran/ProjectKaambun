@@ -1,5 +1,7 @@
 // ignore: file_names
 // ignore_for_file: file_names, prefer_const_literals_to_create_immutables
+import 'dart:ui';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project/Hours.dart';
@@ -382,7 +384,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     ],
                   ),
 
-                  
                   // length of task
                   Row(
                     children: [
@@ -397,24 +398,40 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-
-                      // add slider here for length of task
-                       Slider(
-            value: sliderValue,
-            min: 0.0,
-            max: 100.0,
-            onChanged: (newValue) {
-              setState(() {
-                sliderValue = newValue;
-              });
-            },
-          ),
-
-                      
-
-
-                      // add more code here:
                     ],
+                  ),
+                  // add slider here for length of task
+                  Slider(
+                    value: sliderValue,
+                    min: 0.0,
+                    max: 100.0,
+                    onChanged: (newValue) {
+                      setState(() {
+                        sliderValue = newValue;
+                      });
+                    },
+                    activeColor: Color(0xffc847f4),
+                    thumbColor: Colors.white,
+                    inactiveColor: Color.fromRGBO(77, 77, 77, 0.9),
+                  ),
+                  // time
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width *
+                              0.04), // Adjust the left padding as needed
+                      child: Text(
+                        sliderValue.round() >= 60
+                            ? '${(sliderValue.round() ~/ 60).toString()} hours ${(sliderValue.round() % 60).toString()} minutes'
+                            : '${sliderValue.round().toString()} minutes',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
