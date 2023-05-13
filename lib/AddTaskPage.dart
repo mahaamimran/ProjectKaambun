@@ -26,8 +26,10 @@ class _CustomButtonState extends State<CustomButton> {
         });
       },
       child: Container(
+        height: MediaQuery.of(context).size.width * 0.09,
+        width: MediaQuery.of(context).size.width * 0.125,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(10.0),
           gradient: isPressed
               ? LinearGradient(
                   colors: [
@@ -48,13 +50,15 @@ class _CustomButtonState extends State<CustomButton> {
                   stops: [0.0, 1.0],
                 ),
         ),
-        padding: EdgeInsets.all(8.0),
-        child: Text(
-          widget.weekday,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: MediaQuery.of(context).size.width * 0.04,
-            fontWeight: FontWeight.w500,
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+        child: Center(
+          child: Text(
+            widget.weekday,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: MediaQuery.of(context).size.width * 0.037,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),
