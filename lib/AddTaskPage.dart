@@ -1,8 +1,12 @@
+// ignore: file_names
+// ignore_for_file: file_names, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:project/Hours.dart';
 import 'package:project/Minutes.dart';
 
 class AddTaskPage extends StatefulWidget {
+  // ignore: use_key_in_widget_constructors
   const AddTaskPage({Key? key});
 
   @override
@@ -115,7 +119,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           final hour =
                               index + 1; // Add 1 to start from 1 instead of 0
                           return Transform.scale(
-                            scale: currentHour == hour ? 1.0 : 0.5,
+                            scale: currentHour == hour ? 1.5 : 0.6,
                             child: Opacity(
                               opacity: currentHour == hour ? 1.0 : 0.3,
                               child: Hours(hour: hour),
@@ -141,7 +145,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         childCount: 60,
                         builder: (context, index) {
                           return Transform.scale(
-                            scale: currentMinute == index ? 1.0 : 0.5,
+                            scale: currentMinute == index ? 1.5 : 0.6,
                             child: Opacity(
                               opacity: currentMinute == index ? 1.0 : 0.3,
                               child: Minutes(mins: index),
@@ -169,7 +173,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       physics: FixedExtentScrollPhysics(),
                       children: [
                         Transform.scale(
-                          scale: currentAmPm == "AM" ? 1.0 : 0.9,
+                          scale: currentAmPm == "AM" ? 1.5 : 0.6,
                           child: Opacity(
                             opacity: currentAmPm == "AM" ? 1.0 : 0.4,
                             child: Container(
@@ -226,7 +230,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   Row(
                     children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.05,
+                        width: MediaQuery.of(context).size.width * 0.04,
                       ),
                       Text(
                         "Repeat",
@@ -257,9 +261,17 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ])
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
                             borderRadius: BorderRadius.circular(
                                 8.0), // Adjust the border radius as needed
+                            gradient: LinearGradient(
+                              colors: [
+                                Color(0xff6e54f7),
+                                Color(0xffc847f4),
+                              ],
+                              begin: Alignment.topRight,
+                              end: Alignment.bottomLeft,
+                              stops: [0.0, 1.0],
+                            ),
                           ),
                           padding: EdgeInsets.all(
                               MediaQuery.of(context).size.width *
@@ -267,7 +279,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           child: Text(
                             weekday,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.04,
                               fontWeight: FontWeight.w500,
