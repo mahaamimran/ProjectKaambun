@@ -48,8 +48,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       hintText: 'Task Name',
                       contentPadding: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.04,
-                        bottom: MediaQuery.of(context).size.width * 0.035,
-                        top: MediaQuery.of(context).size.width * 0.053,
+                        bottom: MediaQuery.of(context).size.width * 0.01,
+                        top: MediaQuery.of(context).size.width * 0.05,
                         right: MediaQuery.of(context).size.width * 0.03,
                       ),
                       hintStyle: const TextStyle(
@@ -90,39 +90,41 @@ class _AddTaskPageState extends State<AddTaskPage> {
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.13),
+                  horizontal: MediaQuery.of(context).size.width * 0.13,
+                  vertical: MediaQuery.of(context).size.width * 0.14),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-  child: ListWheelScrollView.useDelegate(
-    onSelectedItemChanged: (value) {
-      setState(() {
-        currentHour = value + 1; // Add 1 to start from 1 instead of 0
-      });
-      print(currentHour);
-      // ADD VALIDATION HERE
-    },
-    itemExtent: MediaQuery.of(context).size.width * 0.1,
-    perspective: 0.01,
-    diameterRatio: MediaQuery.of(context).size.width * 0.002,
-    physics: FixedExtentScrollPhysics(),
-    childDelegate: ListWheelChildBuilderDelegate(
-      childCount: 12, // Update the childCount to 12
-      builder: (context, index) {
-        final hour = index+1; // Add 1 to start from 1 instead of 0
-        return Transform.scale(
-          scale: currentHour == hour ? 1.0 : 0.5,
-          child: Opacity(
-            opacity: currentHour == hour ? 1.0 : 0.3,
-            child: Hours(hour: hour),
-          ),
-        );
-      },
-    ),
-  ),
-),
-
+                    child: ListWheelScrollView.useDelegate(
+                      onSelectedItemChanged: (value) {
+                        setState(() {
+                          currentHour =
+                              value + 1; // Add 1 to start from 1 instead of 0
+                        });
+                        print(currentHour);
+                        // ADD VALIDATION HERE
+                      },
+                      itemExtent: MediaQuery.of(context).size.width * 0.1,
+                      perspective: 0.00005,
+                      diameterRatio: MediaQuery.of(context).size.width * 0.002,
+                      physics: FixedExtentScrollPhysics(),
+                      childDelegate: ListWheelChildBuilderDelegate(
+                        childCount: 12, // Update the childCount to 12
+                        builder: (context, index) {
+                          final hour =
+                              index + 1; // Add 1 to start from 1 instead of 0
+                          return Transform.scale(
+                            scale: currentHour == hour ? 1.0 : 0.5,
+                            child: Opacity(
+                              opacity: currentHour == hour ? 1.0 : 0.3,
+                              child: Hours(hour: hour),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                   Expanded(
                     child: ListWheelScrollView.useDelegate(
                       onSelectedItemChanged: (value) {
@@ -132,7 +134,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         print(currentMinute);
                       },
                       itemExtent: MediaQuery.of(context).size.width * 0.1,
-                      perspective: 0.01,
+                      perspective: 0.00005,
                       diameterRatio: MediaQuery.of(context).size.width * 0.002,
                       physics: FixedExtentScrollPhysics(),
                       childDelegate: ListWheelChildBuilderDelegate(
@@ -162,7 +164,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         print(currentAmPm);
                       },
                       itemExtent: MediaQuery.of(context).size.width * 0.1,
-                      perspective: 0.01,
+                      perspective: 0.00005,
                       diameterRatio: MediaQuery.of(context).size.width * 0.002,
                       physics: FixedExtentScrollPhysics(),
                       children: [
@@ -207,6 +209,42 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "something random",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width * 0.06,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    "something random",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width * 0.06,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    "something random",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width * 0.06,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
