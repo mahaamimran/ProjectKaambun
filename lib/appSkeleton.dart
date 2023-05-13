@@ -8,6 +8,7 @@ import 'home.dart';
 import 'AddTaskPage.dart';
 import 'ScheduledTasks.dart';
 import 'SettingsPage.dart';
+import 'testwidget.dart';
 
 class MainPage extends StatelessWidget {
   @override

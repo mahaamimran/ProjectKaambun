@@ -13,7 +13,12 @@ import 'ScheduledTasks.dart';
 import 'SettingsPage.dart';
 import 'testwidget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
+
 void main() {
   runApp(MainPage());
+ /* 
+ (MaterialApp(
+    home: TestWidget(),
+  ));
+ */
 }

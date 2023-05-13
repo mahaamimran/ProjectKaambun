@@ -1,8 +1,9 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:project/Hours.dart';
+import 'package:project/Minutes.dart';
 
 class AddTaskPage extends StatefulWidget {
-  const AddTaskPage({Key? key}) : super(key: key);
+  const AddTaskPage({Key? key});
 
   @override
   State<AddTaskPage> createState() => _AddTaskPageState();
@@ -12,94 +13,204 @@ class _AddTaskPageState extends State<AddTaskPage> {
   TextEditingController taskNameController = TextEditingController();
   bool isEditing = false;
   Color penColor = Colors.white;
+  int currentHour = 1;
+  int currentMinute = 0;
+  String currentAmPm = "AM";
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  // snackbar
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff212327),
-      body: Stack(
+      key: _scaffoldKey,
+      backgroundColor: Color(0xff212327),
+      body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.03,
-              vertical: 0,
-            ),
-            child: ListView(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+            child: Row(
               children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                ),
-                Row(
-                  children: [
-                    // Task Name
-                    Expanded(
-                      child: TextField(
-                        controller: taskNameController,
-                        enabled: isEditing,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Task Name',
-                          contentPadding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.04,
-                            bottom: MediaQuery.of(context).size.width * 0.035,
-                            top: MediaQuery.of(context).size.width * 0.053,
-                            right: MediaQuery.of(context).size.width * 0.03,
-                          ),
-                          hintStyle: const TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "Cupertino",
-                          letterSpacing: 0,
-                        ),
+                // Task Name
+                Expanded(
+                  child: TextField(
+                    controller: taskNameController,
+                    enabled: isEditing,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Task Name',
+                      contentPadding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.04,
+                        bottom: MediaQuery.of(context).size.width * 0.035,
+                        top: MediaQuery.of(context).size.width * 0.053,
+                        right: MediaQuery.of(context).size.width * 0.03,
+                      ),
+                      hintStyle: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
-
-                    // clicking on the pen icon will enable editing
-                    // toggles color of pen icon
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isEditing = !isEditing;
-                          penColor = isEditing
-                              ? Color.fromRGBO(203, 124, 229, 1)
-                              : Colors.white;
-                        });
-                        print("edit clicked");
-                        print(isEditing);
-                      },
-                      child: Image.asset(
-                        '/Users/mahamimran/project/assets/editpen.png',
-                        color: penColor,
-                      ),
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Cupertino",
+                      letterSpacing: 0,
                     ),
-                  ],
+                  ),
                 ),
 
-                // add code here
-                //   Text(  "Add Task Page"),
-                /*
-                ListWheelScrollView(
-                  itemExtent: 50,
-                  children: [
-                    Container(color: Colors.red),
-                    Container(color: Colors.green),
-                    Container(color: Colors.blue),
-                    Container(color: Colors.yellow),
-                    Container(color: Colors.orange),
-                    Container(color: Colors.pink),
-                    Container(color: Colors.cyan),
-                    Container(color: Colors.indigo),
-                    Container(color: Colors.blueGrey),
-                    Container(color: Colors.lightGreen),
-                  ],
+                // clicking on the pen icon will enable editing
+                // toggles color of pen icon
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isEditing = !isEditing;
+                      penColor = isEditing
+                          ? Color.fromRGBO(203, 124, 229, 1)
+                          : Colors.white;
+                    });
+                    print("edit clicked");
+                    print(isEditing);
+                  },
+                  child: Image.asset(
+                    '/Users/mahamimran/project/assets/editpen.png',
+                    color: penColor,
+                  ),
                 ),
-                */
               ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.13),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+  child: ListWheelScrollView.useDelegate(
+    onSelectedItemChanged: (value) {
+      setState(() {
+        currentHour = value + 1; // Add 1 to start from 1 instead of 0
+      });
+      print(currentHour);
+      // ADD VALIDATION HERE
+    },
+    itemExtent: MediaQuery.of(context).size.width * 0.1,
+    perspective: 0.01,
+    diameterRatio: MediaQuery.of(context).size.width * 0.002,
+    physics: FixedExtentScrollPhysics(),
+    childDelegate: ListWheelChildBuilderDelegate(
+      childCount: 12, // Update the childCount to 12
+      builder: (context, index) {
+        final hour = index+1; // Add 1 to start from 1 instead of 0
+        return Transform.scale(
+          scale: currentHour == hour ? 1.0 : 0.5,
+          child: Opacity(
+            opacity: currentHour == hour ? 1.0 : 0.3,
+            child: Hours(hour: hour),
+          ),
+        );
+      },
+    ),
+  ),
+),
+
+                  Expanded(
+                    child: ListWheelScrollView.useDelegate(
+                      onSelectedItemChanged: (value) {
+                        setState(() {
+                          currentMinute = value;
+                        });
+                        print(currentMinute);
+                      },
+                      itemExtent: MediaQuery.of(context).size.width * 0.1,
+                      perspective: 0.01,
+                      diameterRatio: MediaQuery.of(context).size.width * 0.002,
+                      physics: FixedExtentScrollPhysics(),
+                      childDelegate: ListWheelChildBuilderDelegate(
+                        childCount: 60,
+                        builder: (context, index) {
+                          return Transform.scale(
+                            scale: currentMinute == index ? 1.0 : 0.5,
+                            child: Opacity(
+                              opacity: currentMinute == index ? 1.0 : 0.3,
+                              child: Minutes(mins: index),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListWheelScrollView(
+                      onSelectedItemChanged: (value) {
+                        setState(() {
+                          if (value == 0) {
+                            currentAmPm = "AM";
+                          } else {
+                            currentAmPm = "PM";
+                          }
+                        });
+                        print(currentAmPm);
+                      },
+                      itemExtent: MediaQuery.of(context).size.width * 0.1,
+                      perspective: 0.01,
+                      diameterRatio: MediaQuery.of(context).size.width * 0.002,
+                      physics: FixedExtentScrollPhysics(),
+                      children: [
+                        Transform.scale(
+                          scale: currentAmPm == "AM" ? 1.0 : 0.9,
+                          child: Opacity(
+                            opacity: currentAmPm == "AM" ? 1.0 : 0.4,
+                            child: Container(
+                              child: Center(
+                                child: Text(
+                                  "AM",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.07,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Transform.scale(
+                          scale: currentAmPm == "PM" ? 1.0 : 0.5,
+                          child: Opacity(
+                            opacity: currentAmPm == "PM" ? 1.0 : 0.4,
+                            child: Container(
+                              child: Center(
+                                child: Text(
+                                  "PM",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.07,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
