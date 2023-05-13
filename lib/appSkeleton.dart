@@ -30,8 +30,7 @@ class AppSkeleton extends StatefulWidget {
 }
 
 class _AppSkeletonState extends State<AppSkeleton> {
-  int _selectedIndex = 1;
-
+  int _selectedIndex = 2;
   final List<Widget> _pages = [
     HomePage(),
     AddTaskPage(),
@@ -51,13 +50,59 @@ class _AppSkeletonState extends State<AppSkeleton> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _appBarTitles[_selectedIndex], // Update the app bar title
+          _appBarTitles[_selectedIndex],
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: MediaQuery.of(context).size.width * 0.055,
           ),
         ),
         backgroundColor: Color(0xff212327),
+        actions: _selectedIndex ==
+                1 // Check if selected index is 1 (Add Task page)
+            ? [
+                TextButton(
+                  onPressed: () {
+                    // Handle save button press
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: MediaQuery.of(context).size.width * 0.03,
+                      horizontal: MediaQuery.of(context).size.width * 0.04,
+                    ),
+                    child: Text(
+                      'Save',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: MediaQuery.of(context).size.width * 0.035,
+                      ),
+                    ),
+                  ),
+                ),
+              ]
+            : _selectedIndex == 2 // Check if selected index is 2 (Third page)
+                ? [
+                    TextButton(
+                      onPressed: () {
+                        // Handle edit button press
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: MediaQuery.of(context).size.width * 0.03,
+                          horizontal: MediaQuery.of(context).size.width * 0.04,
+                        ),
+                        child: Text(
+                          'Edit',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: MediaQuery.of(context).size.width * 0.035,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]
+                : [], // Empty action array for other pages
       ),
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
@@ -72,9 +117,9 @@ class _AppSkeletonState extends State<AppSkeleton> {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: MediaQuery.of(context).size.height * 0.004, 
+            vertical: MediaQuery.of(context).size.height * 0.004,
             horizontal: MediaQuery.of(context).size.width * 0.03,
-            ),
+          ),
           child: GNav(
             gap: MediaQuery.of(context).size.width * 0.045,
             backgroundColor: Color(0xff212327),

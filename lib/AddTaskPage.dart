@@ -6,6 +6,23 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project/Hours.dart';
 import 'package:project/Minutes.dart';
+class TaskData {
+  final String taskName;
+  final String subTaskName;
+  final int currentHour;
+  final int currentMinute;
+  final String currentAmPm;
+  final double sliderValue;
+
+  TaskData({
+    required this.taskName,
+    required this.subTaskName,
+    required this.currentHour,
+    required this.currentMinute,
+    required this.currentAmPm,
+    required this.sliderValue,
+  });
+}
 
 class CustomButton extends StatefulWidget {
   final String weekday;
@@ -74,24 +91,40 @@ class AddTaskPage extends StatefulWidget {
 
   @override
   State<AddTaskPage> createState() => _AddTaskPageState();
+
+  void onSave() {}
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
   TextEditingController taskNameController = TextEditingController();
   TextEditingController subTaskNameController = TextEditingController();
-  bool isEditing = false;
-  Color penColor = Colors.white;
   int currentHour = 1;
   int currentMinute = 0;
   String currentAmPm = "AM";
   double sliderValue = 0.0;
+  bool isEditing = false;
+  Color penColor = Colors.white;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+void onSave() {
+    TaskData taskData = TaskData(
+      taskName: taskNameController.text,
+      subTaskName: subTaskNameController.text,
+      currentHour: currentHour,
+      currentMinute: currentMinute,
+      currentAmPm: currentAmPm,
+      sliderValue: sliderValue,
+    );
+   
+  }
+
+
   // snackbar
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: Duration(seconds: 1),
+        duration: Duration(milliseconds: 300),
       ),
     );
   }
@@ -145,8 +178,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           ? Color.fromRGBO(203, 124, 229, 1)
                           : Colors.white;
                     });
-                    print("edit clicked");
-                    print(isEditing);
+                    isEditing ?_showSnackBar("Editing Enabled"):_showSnackBar("Editing Disabled");
                   },
                   child: Image.asset(
                     '/Users/mahamimran/project/assets/editpen.png',
@@ -156,6 +188,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
               ],
             ),
           ),
+        
+
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -433,6 +467,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                     ),
                   ),
+                  // add more code here
                 ],
               ),
             ),

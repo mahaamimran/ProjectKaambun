@@ -8,6 +8,7 @@ class Hours extends StatelessWidget {
     return Container(
       child: Center(
         child: Text(
+          hour<10 ? "0"+hour.toString() :
           hour.toString(),
           style: TextStyle(
             color: Colors.white,
