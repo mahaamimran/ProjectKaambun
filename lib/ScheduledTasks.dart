@@ -13,7 +13,7 @@ class _ScheduledTasksState extends State<ScheduledTasks> {
   List<TaskItem> tasks = [
     TaskItem(title: 'Wake Up', time: '9:00 AM', minutes: 10),
     TaskItem(title: 'OOP Assignment', time: '10:30 AM', minutes: 45),
-    TaskItem(title: 'Feed Cats', time: '12:15 PM', minutes: 60),
+    TaskItem(title: 'Feed Cats', time: '12:15 PM', minutes: 05),
     TaskItem(title: 'WWDC!!', time: '2:00 PM', minutes: 75),
     TaskItem(title: 'Gym', time: '4:15 PM', minutes: 90),
     TaskItem(title: 'Assignment 3 :(', time: '6:00 PM', minutes: 120),
@@ -25,6 +25,8 @@ class _ScheduledTasksState extends State<ScheduledTasks> {
       Color(0xffc847f4),
       Color.fromRGBO(110, 119, 248, 0.898)
     ];
+      tasks.sort((a, b) => a.isComplete == b.isComplete ? 0 : a.isComplete ? 1 : -1);
+
 
     return Scaffold(
       backgroundColor: const Color(0xff212327),
