@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isContainerClicked = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,10 +32,8 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     // scrollable stuff
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.03,
-                        vertical: 0
-                        ),
+                      padding: EdgeInsets.all(
+                          MediaQuery.of(context).size.width * 0.035),
                       child: ListView(
                         children: [
                           // motvational quote container
@@ -106,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                           // space between highlights & goal tracking
                           SizedBox(
                               height:
-                                  MediaQuery.of(context).size.height * 0.015),
+                                  MediaQuery.of(context).size.height * 0.02),
 
                           // goal tracking
                           Row(
@@ -130,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           // space
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.01,
+                            height: MediaQuery.of(context).size.height * 0.015,
                           ),
 
                           // container for goal tracking
@@ -370,48 +369,86 @@ class _HomePageState extends State<HomePage> {
 
                           // workout box
                           Center(
-                            child: Container(
-                              padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.width * 0.05),
-                              height: MediaQuery.of(context).size.height * 0.09,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    Color.fromARGB(255, 199, 120, 226),
-                                    Color.fromARGB(255, 143, 127, 228),
+                            child: GestureDetector(
+                              onTapDown: (TapDownDetails details) {
+                                setState(() {
+                                  // Update the state variable to indicate the container is clicked
+                                  isContainerClicked = true;
+                                });
+                              },
+                              onTapUp: (TapUpDetails details) {
+                                setState(() {
+                                  // Update the state variable to indicate the container is released
+                                  isContainerClicked = false;
+                                });
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(
+                                    MediaQuery.of(context).size.width * 0.05),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.09,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: isContainerClicked
+                                        ? [
+                                            Color.fromARGB(255, 143, 127, 228),
+                                            Color.fromARGB(255, 199, 120, 226),
+                                          ]
+                                        : [
+                                            Color.fromARGB(255, 199, 120, 226),
+                                            Color.fromARGB(255, 143, 127, 228),
+                                          ],
+                                  ),
+                                  boxShadow: isContainerClicked
+                                      ? [
+                                          BoxShadow(
+                                            color:
+                                                Colors.white.withOpacity(0.3),
+                                            spreadRadius: 3,
+                                            blurRadius: 7,
+                                            offset: Offset(0, 3),
+                                          ),
+                                        ]
+                                      : [],
+                                ),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      '/Users/mahamimran/project/assets/workoutsparkle.png', // Replace with the path to your image file
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.05,
+                                    ),
+                                    SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.04),
+                                    Text(
+                                      "Workout",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.05,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.5),
+                                    Image.asset(
+                                      '/Users/mahamimran/project/assets/rightarrow.png',
+                                      scale: MediaQuery.of(context).size.width *
+                                          0.0018,
+                                    ),
                                   ],
                                 ),
-                              ),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    '/Users/mahamimran/project/assets/workoutsparkle.png', // Replace with the path to your image file
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.05,
-                                  ),
-                                  SizedBox(width: MediaQuery.of(context).size.width * 0.04),
-                                  Text(
-                                    "Workout",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.05,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  SizedBox(width: MediaQuery.of(context).size.width * 0.5),
-                                  Image.asset(
-                                    '/Users/mahamimran/project/assets/rightarrow.png',
-                                   
-                                        scale: MediaQuery.of(context).size.width * 0.0018,
-                                  ),
-                                ],
                               ),
                             ),
                           ),

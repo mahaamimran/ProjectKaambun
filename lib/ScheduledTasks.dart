@@ -49,8 +49,8 @@ class _ScheduledTasksState extends State<ScheduledTasks> {
                     colors: [
                       gradientColors[
                           colorIndex], // Assign the color dynamically
-                      gradientColors[(colorIndex + 1) % 3],
                       gradientColors[(colorIndex + 2) % 3],
+                      gradientColors[(colorIndex + 1) % 3],
                     ],
                   ),
                   borderRadius: BorderRadius.circular(25.0),
