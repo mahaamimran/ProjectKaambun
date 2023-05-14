@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                                       0.012,
                                 ),
                                 Text(
-                                  "today is not your day. try again tomorrow.",
+                                  "Until we can manage time, we can manage nothing else",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize:
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: Text(
-                                    "- Maham",
+                                    "- Peter Drucker",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize:

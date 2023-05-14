@@ -176,11 +176,10 @@ class SettingsOption extends StatelessWidget {
                 value: toggleValue,
                 onChanged: onToggleChanged,
                 activeColor: Color(
-                    0xff6e54f7), // Customize the active color of the switch
+                    0xffc847f4), // Customize the active color of the switch
                 inactiveThumbColor: Colors
                     .grey, // Customize the inactive thumb color of the switch
-                inactiveTrackColor: Colors.grey.withOpacity(
-                    0.5), // Customize the inactive track color of the switch
+                inactiveTrackColor: Colors.grey.withOpacity(0.5),
               ),
           ],
         ),
