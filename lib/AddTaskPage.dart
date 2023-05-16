@@ -6,6 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project/Hours.dart';
 import 'package:project/Minutes.dart';
+
 class TaskData {
   final String taskName;
   final String subTaskName;
@@ -105,8 +106,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
   bool isEditing = false;
   Color penColor = Colors.white;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-void onSave() {
+  List<int> hoursList = List<int>.generate(12, (index) => index + 1);
+  List<int> minutesList = List<int>.generate(60, (index) => index);
+  void onSave() {
     TaskData taskData = TaskData(
       taskName: taskNameController.text,
       subTaskName: subTaskNameController.text,
@@ -115,9 +117,7 @@ void onSave() {
       currentAmPm: currentAmPm,
       sliderValue: sliderValue,
     );
-   
   }
-
 
   // snackbar
   void _showSnackBar(String message) {
@@ -178,7 +178,9 @@ void onSave() {
                           ? Color.fromRGBO(203, 124, 229, 1)
                           : Colors.white;
                     });
-                    isEditing ?_showSnackBar("Editing Enabled"):_showSnackBar("Editing Disabled");
+                    isEditing
+                        ? _showSnackBar("Editing Enabled")
+                        : _showSnackBar("Editing Disabled");
                   },
                   child: Image.asset(
                     '/Users/mahamimran/project/assets/editpen.png',
@@ -188,8 +190,6 @@ void onSave() {
               ],
             ),
           ),
-        
-
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -199,61 +199,54 @@ void onSave() {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: ListWheelScrollView.useDelegate(
-                      onSelectedItemChanged: (value) {
-                        setState(() {
-                          currentHour =
-                              value + 1; // Add 1 to start from 1 instead of 0
-                        });
-                        print(currentHour);
-                        // ADD VALIDATION HERE
-                      },
-                      itemExtent: MediaQuery.of(context).size.width * 0.1,
-                      perspective: 0.00005,
-                      diameterRatio: MediaQuery.of(context).size.width * 0.002,
-                      physics: FixedExtentScrollPhysics(),
-                      childDelegate: ListWheelChildBuilderDelegate(
-                        childCount: 12, // Update the childCount to 12
-                        builder: (context, index) {
-                          final hour =
-                              index + 1; // Add 1 to start from 1 instead of 0
-                          return Transform.scale(
-                            scale: currentHour == hour ? 1.5 : 0.6,
-                            child: Opacity(
-                              opacity: currentHour == hour ? 1.0 : 0.3,
-                              child: Hours(hour: hour),
-                            ),
-                          );
-                        },
-                      ),
+                      child: ListWheelScrollView.useDelegate(
+                    onSelectedItemChanged: (value) {
+                      setState(() {
+                        currentHour = hoursList[value];
+                      });
+                      print(currentHour);
+                      // ADD VALIDATION HERE
+                    },
+                    itemExtent: MediaQuery.of(context).size.width * 0.1,
+                    perspective: 0.00005,
+                    diameterRatio: MediaQuery.of(context).size.width * 0.002,
+                    physics: FixedExtentScrollPhysics(),
+                    childDelegate: ListWheelChildLoopingListDelegate(
+                      children: hoursList.map((hour) {
+                        return Transform.scale(
+                          scale: currentHour == hour ? 1.5 : 0.6,
+                          child: Opacity(
+                            opacity: currentHour == hour ? 1.0 : 0.3,
+                            child: Hours(hour: hour),
+                          ),
+                        );
+                      }).toList(),
                     ),
-                  ),
+                  )),
                   Expanded(
-                    child: ListWheelScrollView.useDelegate(
-                      onSelectedItemChanged: (value) {
-                        setState(() {
-                          currentMinute = value;
-                        });
-                        print(currentMinute);
-                      },
-                      itemExtent: MediaQuery.of(context).size.width * 0.1,
-                      perspective: 0.00005,
-                      diameterRatio: MediaQuery.of(context).size.width * 0.002,
-                      physics: FixedExtentScrollPhysics(),
-                      childDelegate: ListWheelChildBuilderDelegate(
-                        childCount: 60,
-                        builder: (context, index) {
-                          return Transform.scale(
-                            scale: currentMinute == index ? 1.5 : 0.6,
-                            child: Opacity(
-                              opacity: currentMinute == index ? 1.0 : 0.3,
-                              child: Minutes(mins: index),
-                            ),
-                          );
-                        },
-                      ),
+                      child: ListWheelScrollView.useDelegate(
+                    onSelectedItemChanged: (value) {
+                      setState(() {
+                        currentMinute = value;
+                      });
+                      print(currentMinute);
+                    },
+                    itemExtent: MediaQuery.of(context).size.width * 0.1,
+                    perspective: 0.00005,
+                    diameterRatio: MediaQuery.of(context).size.width * 0.002,
+                    physics: FixedExtentScrollPhysics(),
+                    childDelegate: ListWheelChildLoopingListDelegate(
+                      children: minutesList.map((minute) {
+                        return Transform.scale(
+                          scale: currentMinute == minute ? 1.5 : 0.6,
+                          child: Opacity(
+                            opacity: currentMinute == minute ? 1.0 : 0.3,
+                            child: Minutes(mins: minute),
+                          ),
+                        );
+                      }).toList(),
                     ),
-                  ),
+                  )),
                   Expanded(
                     child: ListWheelScrollView(
                       onSelectedItemChanged: (value) {

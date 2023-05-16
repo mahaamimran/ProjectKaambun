@@ -24,14 +24,14 @@ class _SignInPageState extends State<SignInPage> {
   bool _hidePassword = true;
   bool _isEyeIconPressed = false;
  void authenticateUser(BuildContext context) {
-  if (nameController.text == "mahamimran" && passwordController.text == "12345678") {
+  if (nameController.text == "mahamimran" && passwordController.text == "Maham##2") {
     print("user authenticated");
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => WelcomePage()),
     );
   } 
-  else if(nameController.text == "mahamimran" && passwordController.text != "12345678"){
+  else if(nameController.text == "mahamimran" && passwordController.text != "Maham##2"){
     print("invalid password");
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -39,7 +39,7 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
   }
-  else if(nameController.text != "mahamimran" && passwordController.text == "12345678"){
+  else if(nameController.text != "mahamimran" && passwordController.text == "Maham##2"){
     print("invalid username");
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
