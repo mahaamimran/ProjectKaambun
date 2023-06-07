@@ -196,8 +196,8 @@ void authenticateUser(BuildContext context) {
                         },
                         child: Image.asset(
                           _isEyeIconPressed
-                              ? '/Users/mahamimran/project/assets/openeyeicon.png'
-                              : '/Users/mahamimran/project/assets/eyeicon.png',
+                              ? 'assets/openeyeicon.png'
+                              : 'assets/eyeicon.png',
                           key: Key('eyeIconKey'),
                           width: MediaQuery.of(context).size.width * 0.05,
                           height: MediaQuery.of(context).size.height * 0.05,
@@ -415,13 +415,13 @@ void authenticateUser(BuildContext context) {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Image.asset(
-                              '/Users/mahamimran/project/assets/applelogo.png',
+                              'assets/applelogo.png',
                             ),
                             Image.asset(
-                              '/Users/mahamimran/project/assets/googlelogo.png',
+                              'assets/googlelogo.png',
                             ),
                             Image.asset(
-                              '/Users/mahamimran/project/assets/facebooklogo.png',
+                              'assets/facebooklogo.png',
                             ),
                           ],
                         ),

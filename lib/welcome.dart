@@ -86,11 +86,10 @@ class _WelcomePageState extends State<WelcomePage> {
                   top: MediaQuery.of(context).size.height * 0.27,
                   left: 0,
                   right: 0,
-                  child: Image.file(
-                    key: Key("sunsetKey"),
-                    File("/Users/mahamimran/project/assets/sunset.png"),
-                    scale: 0.5,
-                    alignment: Alignment.center,
+                  child: Image.asset(
+                    "assets/sunset.png",
+                    key: Key("welcomeImageKey"),
+                    fit: BoxFit.cover,
                   ),
                 ),
 
