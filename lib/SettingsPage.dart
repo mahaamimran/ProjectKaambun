@@ -5,6 +5,7 @@ import 'package:project/signIn.dart';
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }

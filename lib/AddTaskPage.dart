@@ -183,7 +183,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         : _showSnackBar("Editing Disabled");
                   },
                   child: Image.asset(
-                    '/Users/mahamimran/project/assets/editpen.png',
+                    'assets/editpen.png',
                     color: penColor,
                   ),
                 ),
@@ -404,7 +404,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         ),
                       ),
                       Image.asset(
-                        "/Users/mahamimran/project/assets/rightarrow.png",
+                        "assets/rightarrow.png",
                         width: MediaQuery.of(context).size.width * 0.07,
                         scale: 0.7,
                       ),

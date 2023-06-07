@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(
-                                  '/Users/mahamimran/project/assets/goaltracking.png'),
+                                  'assets/goaltracking.png'),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.02,
                               ),
@@ -251,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                                   scale: MediaQuery.of(context).size.width *
                                       0.0029,
                                   child: Image.asset(
-                                    '/Users/mahamimran/project/assets/graph.png',
+                                    'assets/graph.png',
                                     height: MediaQuery.of(context).size.height *
                                         0.19,
                                   ),
@@ -417,7 +417,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Row(
                                   children: [
                                     Image.asset(
-                                      '/Users/mahamimran/project/assets/workoutsparkle.png', // Replace with the path to your image file
+                                      'assets/workoutsparkle.png', // Replace with the path to your image file
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.05,
@@ -443,7 +443,7 @@ class _HomePageState extends State<HomePage> {
                                             MediaQuery.of(context).size.width *
                                                 0.5),
                                     Image.asset(
-                                      '/Users/mahamimran/project/assets/rightarrow.png',
+                                      'assets/rightarrow.png',
                                       scale: MediaQuery.of(context).size.width *
                                           0.0018,
                                     ),
