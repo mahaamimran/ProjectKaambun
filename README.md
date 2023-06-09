@@ -3,6 +3,5 @@ A comprehensive task scheduling and management app for iOS and Android devices. 
 
 ## Resources
 - [UI: Link to Figma](https://www.figma.com/file/ttKYQyYslsNT59QHtDhB5v/ProjectkaamBun?t=ezV9R72XMtsjZ65Q-1)
-- [Documentation + Content: Link to Notion](https://www.notion.so/intro-to-SE-project-5fd5093bd81a4fa884c975ed64ee57e6?pvs=4)
-- [Workspace: Link to Trello](https://trello.com/invite/b/OdT5oMIT/ATTIf56fa2db208c7d6fc64f5c0028fc273238C5854A/ise-project)
+- [Documentation + Content: Link to Notion](https://square-airboat-7ac.notion.site/project-5fd5093bd81a4fa884c975ed64ee57e6)
 ##### - Maham
