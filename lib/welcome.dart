@@ -113,7 +113,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       GestureDetector(
                         onTap: () {
                           // add home screen here
-                          print('wake clicked');
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MainPage()),
@@ -143,7 +142,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                        GestureDetector(
                         onTap: () {
-                          print('wake text');
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MainPage()),
@@ -174,7 +172,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       GestureDetector(
                         onTap: () {
                           // add home screen here
-                          print('organised clicked');
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MainPage()),
@@ -204,7 +201,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          print('organised text');
                         },
                       ),
                     ],
@@ -231,7 +227,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       GestureDetector(
                         onTap: () {
                           // add home screen here
-                          print('productive clicked');
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MainPage()),
@@ -261,7 +256,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          print('productive text clicked');
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MainPage()),

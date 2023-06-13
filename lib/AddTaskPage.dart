@@ -1,8 +1,4 @@
-// ignore: file_names
-// ignore_for_file: file_names, prefer_const_literals_to_create_immutables
-import 'dart:ui';
-
-import 'package:flutter/gestures.dart';
+// ignore_for_file:  prefer_const_literals_to_create_immutables, file_names, library_private_types_in_public_api, avoid_print
 import 'package:flutter/material.dart';
 import 'package:project/Hours.dart';
 import 'package:project/Minutes.dart';
@@ -28,7 +24,7 @@ class TaskData {
 class CustomButton extends StatefulWidget {
   final String weekday;
 
-  CustomButton(this.weekday);
+  const CustomButton(this.weekday, {super.key});
 
   @override
   _CustomButtonState createState() => _CustomButtonState();
@@ -51,7 +47,7 @@ class _CustomButtonState extends State<CustomButton> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           gradient: isPressed
-              ? LinearGradient(
+              ? const LinearGradient(
                   colors: [
                     Color.fromRGBO(77, 77, 77, 0.9),
                     Color.fromRGBO(77, 77, 77, 0.9),
@@ -60,7 +56,7 @@ class _CustomButtonState extends State<CustomButton> {
                   end: Alignment.bottomLeft,
                   stops: [0.0, 1.0],
                 )
-              : LinearGradient(
+              : const LinearGradient(
                   colors: [
                     Color(0xff6e54f7),
                     Color(0xffc847f4),
@@ -108,23 +104,14 @@ class _AddTaskPageState extends State<AddTaskPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<int> hoursList = List<int>.generate(12, (index) => index + 1);
   List<int> minutesList = List<int>.generate(60, (index) => index);
-  void onSave() {
-    TaskData taskData = TaskData(
-      taskName: taskNameController.text,
-      subTaskName: subTaskNameController.text,
-      currentHour: currentHour,
-      currentMinute: currentMinute,
-      currentAmPm: currentAmPm,
-      sliderValue: sliderValue,
-    );
-  }
+ 
 
   // snackbar
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
       ),
     );
   }
@@ -133,7 +120,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Color(0xff212327),
+      backgroundColor: const Color(0xff212327),
       body: Column(
         children: [
           Padding(
@@ -159,7 +146,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       ),
                     ),
                     style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: const Color.fromARGB(255, 255, 255, 255),
                       fontSize: MediaQuery.of(context).size.width * 0.04,
                       fontWeight: FontWeight.w500,
                       fontFamily: "Cupertino",
@@ -175,7 +162,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     setState(() {
                       isEditing = !isEditing;
                       penColor = isEditing
-                          ? Color.fromRGBO(203, 124, 229, 1)
+                          ? const Color.fromRGBO(203, 124, 229, 1)
                           : Colors.white;
                     });
                     isEditing
@@ -210,7 +197,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     itemExtent: MediaQuery.of(context).size.width * 0.1,
                     perspective: 0.00005,
                     diameterRatio: MediaQuery.of(context).size.width * 0.002,
-                    physics: FixedExtentScrollPhysics(),
+                    physics: const FixedExtentScrollPhysics(),
                     childDelegate: ListWheelChildLoopingListDelegate(
                       children: hoursList.map((hour) {
                         return Transform.scale(
@@ -234,7 +221,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     itemExtent: MediaQuery.of(context).size.width * 0.1,
                     perspective: 0.00005,
                     diameterRatio: MediaQuery.of(context).size.width * 0.002,
-                    physics: FixedExtentScrollPhysics(),
+                    physics: const FixedExtentScrollPhysics(),
                     childDelegate: ListWheelChildLoopingListDelegate(
                       children: minutesList.map((minute) {
                         return Transform.scale(
@@ -262,23 +249,21 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       itemExtent: MediaQuery.of(context).size.width * 0.1,
                       perspective: 0.00005,
                       diameterRatio: MediaQuery.of(context).size.width * 0.002,
-                      physics: FixedExtentScrollPhysics(),
+                      physics: const FixedExtentScrollPhysics(),
                       children: [
                         Transform.scale(
                           scale: currentAmPm == "AM" ? 1.5 : 0.6,
                           child: Opacity(
                             opacity: currentAmPm == "AM" ? 1.0 : 0.4,
-                            child: Container(
-                              child: Center(
-                                child: Text(
-                                  "AM",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.07,
-                                  ),
+                            child: Center(
+                              child: Text(
+                                "AM",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width *
+                                          0.07,
                                 ),
                               ),
                             ),
@@ -288,17 +273,15 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           scale: currentAmPm == "PM" ? 1.5 : 0.6,
                           child: Opacity(
                             opacity: currentAmPm == "PM" ? 1.0 : 0.4,
-                            child: Container(
-                              child: Center(
-                                child: Text(
-                                  "PM",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.07,
-                                  ),
+                            child: Center(
+                              child: Text(
+                                "PM",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width *
+                                          0.07,
                                 ),
                               ),
                             ),
@@ -437,9 +420,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         sliderValue = newValue;
                       });
                     },
-                    activeColor: Color(0xffc847f4),
+                    activeColor: const Color(0xffc847f4),
                     thumbColor: Colors.white,
-                    inactiveColor: Color.fromRGBO(77, 77, 77, 0.9),
+                    inactiveColor: const Color.fromRGBO(77, 77, 77, 0.9),
                   ),
                   // time
                   Align(
@@ -452,7 +435,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         sliderValue.round() >= 60
                             ? '${(sliderValue.round() ~/ 60).toString()} hours ${(sliderValue.round() % 60).toString()} minutes'
                             : '${sliderValue.round().toString()} minutes',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16.0,
                           fontWeight: FontWeight.w700,

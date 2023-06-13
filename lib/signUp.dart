@@ -1,9 +1,7 @@
-// ignore_for_file: use_key_in_widget_constructors, unnecessary_import, prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, file_names
+// ignore_for_file: use_key_in_widget_constructors, unnecessary_import, prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, file_names, avoid_print, duplicate_ignore
 import 'dart:ui';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:project/home.dart';
 import 'package:project/signIn.dart';
 import 'package:project/welcome.dart';
 
@@ -25,7 +23,6 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isEyeIconPressed = false;
   
 void authenticateUser(BuildContext context) {
-  RegExp passwordRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
   String message = "";
 
   if (passwordController.text.isEmpty) {

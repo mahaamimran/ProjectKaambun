@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:project/Hours.dart';
 import 'package:project/Minutes.dart';
@@ -186,17 +188,15 @@ int currentHour = 0;
                           scale: currentAmPm == "AM" ? 1.0 : 0.9,
                           child: Opacity(
                             opacity: currentAmPm == "AM" ? 1.0 : 0.4,
-                            child: Container(
-                              child: Center(
-                                child: Text(
-                                  "AM",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.07,
-                                  ),
+                            child: Center(
+                              child: Text(
+                                "AM",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width *
+                                          0.07,
                                 ),
                               ),
                             ),
@@ -206,17 +206,15 @@ int currentHour = 0;
                           scale: currentAmPm == "PM" ? 1.0 : 0.5,
                           child: Opacity(
                             opacity: currentAmPm == "PM" ? 1.0 : 0.4,
-                            child: Container(
-                              child: Center(
-                                child: Text(
-                                  "PM",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.07,
-                                  ),
+                            child: Center(
+                              child: Text(
+                                "PM",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width *
+                                          0.07,
                                 ),
                               ),
                             ),

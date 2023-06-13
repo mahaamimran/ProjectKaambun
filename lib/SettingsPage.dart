@@ -1,4 +1,5 @@
-// ignore: file_names
+// ignore_for_file: file_names, library_private_types_in_public_api, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:project/signIn.dart';
 
@@ -18,7 +19,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff212327),
+      backgroundColor: const Color(0xff212327),
       body: ListView(
         padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
         children: [
@@ -123,7 +124,7 @@ class _SettingsPageState extends State<SettingsPage> {
               // go to login page
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SignInPage()),
+                MaterialPageRoute(builder: (context) => const SignInPage()),
               );
             },
           ),
@@ -158,7 +159,7 @@ class SettingsOption extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.08,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
-          color: Color.fromARGB(57, 111, 113, 135),
+          color: const Color.fromARGB(57, 111, 113, 135),
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Row(
@@ -176,7 +177,7 @@ class SettingsOption extends StatelessWidget {
               Switch(
                 value: toggleValue,
                 onChanged: onToggleChanged,
-                activeColor: Color(
+                activeColor: const Color(
                     0xffc847f4), // Customize the active color of the switch
                 inactiveThumbColor: Colors
                     .grey, // Customize the inactive thumb color of the switch
@@ -202,14 +203,14 @@ class LogoutButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        primary: Color.fromARGB(255, 151, 10, 0), // Customize the button color
+        backgroundColor: const Color.fromARGB(255, 151, 10, 0), // Customize the button color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
       child: Container(
         padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
-        child: Text(
+        child: const Text(
           'Logout',
           style: TextStyle(
             color: Colors.white,

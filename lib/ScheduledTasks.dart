@@ -1,5 +1,5 @@
-// ignore: file_names
-// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class ScheduledTasks extends StatefulWidget {
@@ -21,9 +21,9 @@ class _ScheduledTasksState extends State<ScheduledTasks> {
   @override
   Widget build(BuildContext context) {
     final List<Color> gradientColors = [
-      Color(0xff6e54f7),
-      Color(0xffc847f4),
-      Color.fromRGBO(110, 119, 248, 0.898)
+      const Color(0xff6e54f7),
+      const Color(0xffc847f4),
+      const Color.fromRGBO(110, 119, 248, 0.898)
     ];
       tasks.sort((a, b) => a.isComplete == b.isComplete ? 0 : a.isComplete ? 1 : -1);
 
@@ -47,7 +47,7 @@ class _ScheduledTasksState extends State<ScheduledTasks> {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    stops: [0.0, 0.5, 0.8], // Adjust the stops values
+                    stops: const [0.0, 0.5, 0.8], // Adjust the stops values
                     colors: [
                       gradientColors[
                           colorIndex], // Assign the color dynamically
