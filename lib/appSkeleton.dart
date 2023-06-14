@@ -147,7 +147,7 @@ class _AppSkeletonState extends State<AppSkeleton> {
               ),
               GButton(
                 icon: Icons.settings,
-                text: 'Settings',
+               // text: 'Settings',
               ),
             ],
           ),

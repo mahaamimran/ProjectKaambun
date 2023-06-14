@@ -1,232 +1,379 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, avoid_print
-
+// ignore_for_file: use_key_in_widget_constructors, unnecessary_import, prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, file_names, avoid_print
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:project/Hours.dart';
-import 'package:project/Minutes.dart';
+import 'package:flutter/gestures.dart';
+import 'package:project/welcome.dart';
+import 'signUp.dart';
+
 class TestWidget extends StatefulWidget {
-  const TestWidget({Key? key});
+  const TestWidget({super.key});
 
   @override
   State<TestWidget> createState() => _TestWidgetState();
 }
 
 class _TestWidgetState extends State<TestWidget> {
-  TextEditingController taskNameController = TextEditingController();
-  bool isEditing = false;
-  Color penColor = Colors.white;
-int currentHour = 0;
-  int currentMinute = 0;
-  String currentAmPm = "AM";
-  FixedExtentScrollController hourScrollController = FixedExtentScrollController(initialItem: 6);
-  FixedExtentScrollController minuteScrollController = FixedExtentScrollController(initialItem: 30);
-  FixedExtentScrollController amPmScrollController = FixedExtentScrollController(initialItem: 0);
- bool validateSelectedTime() {
-    // Get the current time
-    final currentTime = DateTime.now();
-
-    // Get the selected time from the ListWheelScrollView
-    final selectedHour = currentHour % 12; // Convert to 12-hour format
-    final selectedMinute = currentMinute;
-    final selectedAmPm = currentAmPm;
-
-    // Create a DateTime object with the selected time
-    final selectedTime = DateTime(
-      currentTime.year,
-      currentTime.month,
-      currentTime.day,
-      selectedAmPm == "AM" ? selectedHour : selectedHour + 12,
-      selectedMinute,
-    );
-
-    // Perform validation checks
-    if (selectedHour < 1 || selectedHour > 12) {
-      return false; // Invalid hour
+  // username and password input controllers
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  // sign in button pressed
+  bool _isSignInPressed = false;
+  bool _isSignUpPressed = false;
+  bool _hidePassword = true;
+  bool _isEyeIconPressed = false;
+  void authenticateUser(BuildContext context) {
+    if (nameController.text == "mahamimran" &&
+        passwordController.text == "Maham##2") {
+      print("user authenticated");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => WelcomePage()),
+      );
+    } else if (nameController.text == "mahamimran" &&
+        passwordController.text != "Maham##2") {
+      print("invalid password");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Invalid password.'),
+        ),
+      );
+    } else if (nameController.text != "mahamimran" &&
+        passwordController.text == "Maham##2") {
+      print("invalid username");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Invalid username.'),
+        ),
+      );
+    } else if (nameController.text == "" && passwordController.text == "") {
+      print("Please fill in both the username and password fields.");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('fill in both the username and password fields.'),
+        ),
+      );
+    } else {
+      print("invalid username and password");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Invalid username and password.'),
+        ),
+      );
     }
-    if (selectedMinute < 0 || selectedMinute > 59) {
-      return false; // Invalid minute
-    }
-    if (selectedTime.isBefore(currentTime)) {
-      return false; // Selected time is in the past
-    }
-
-    return true; // Time is valid
-  }
-  @override
-  void initState() {
-    super.initState();
-
-    hourScrollController.addListener(() {
-      if (hourScrollController.position.atEdge) {
-        if (hourScrollController.position.pixels == 0) {
-          setState(() {
-            hourScrollController.jumpToItem(hourScrollController.initialItem - 1);
-          });
-        } else {
-          setState(() {
-            hourScrollController.jumpToItem(0);
-          });
-        }
-      }
-    });
-
-    minuteScrollController.addListener(() {
-      if (minuteScrollController.position.atEdge) {
-        if (minuteScrollController.position.pixels == 0) {
-          setState(() {
-            minuteScrollController.jumpToItem(minuteScrollController.initialItem - 1);
-          });
-        } else {
-          setState(() {
-            minuteScrollController.jumpToItem(0);
-          });
-        }
-      }
-    });
-
-    amPmScrollController.addListener(() {
-      if (amPmScrollController.position.atEdge) {
-        if (amPmScrollController.position.pixels == 0) {
-          setState(() {
-            amPmScrollController.jumpToItem(amPmScrollController.initialItem - 1);
-          });
-        } else {
-          setState(() {
-            amPmScrollController.jumpToItem(0);
-          });
-        }
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // Rest of your build method
-
-    return Scaffold(
-      backgroundColor: Color(0xff212327),
-      body: Column(
-        children: [
-          // Rest of your code
-
-          Expanded(
-            child: ListWheelScrollView.useDelegate(
-              controller: hourScrollController,
-              onSelectedItemChanged: (value) {
-                        setState(() {
-                          currentHour = value;
-                        });
-                        print(currentHour);
-                        if (!validateSelectedTime()) {
-                          print("Invalid time");  
-                        }
-                      },
-                      itemExtent: MediaQuery.of(context).size.width * 0.1,
-                      perspective: 0.01,
-                      diameterRatio: MediaQuery.of(context).size.width * 0.002,
-                      physics: FixedExtentScrollPhysics(),
-                      childDelegate: ListWheelChildBuilderDelegate(
-                        childCount: 13,
-                        builder: (context, index) {
-                          return Transform.scale(
-                            scale: currentHour == index ? 1.0 : 0.5,
-                            child: Opacity(
-                              opacity: currentHour == index ? 1.0 : 0.3,
-                              child: Hours(hour: index),
+    return MaterialApp(
+      home: Builder(builder: (BuildContext context) {
+        return Scaffold(
+          backgroundColor: Color(0xff212327),
+          body: Container(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+            child: Column(
+              children: [
+                // top space
+                SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+                // welcome back
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Welcome back!",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width * 0.075,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                // space after welcome back
+                SizedBox(height: MediaQuery.of(context).size.height * 0.003),
+                // you've been missed
+                Text(
+                  "you've been missed",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                  ),
+                ),
+                // space after you've been missed
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                // username dabba
+                Container(
+                  // dabba dimentions
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.068,
+                  decoration: BoxDecoration(
+                    color: Color(0xff393c41),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Enter username',
+                      contentPadding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.04,
+                          bottom: MediaQuery.of(context).size.width * 0.035,
+                          top: MediaQuery.of(context).size.width * 0.053,
+                          right: MediaQuery.of(context).size.width * 0.03),
+                      hintStyle:
+                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                    ),
+                    // input white
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
+                ),
+                // space after username dabba
+                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                // password dabba
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.068,
+                  decoration: BoxDecoration(
+                    color: Color(0xff393c41),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          obscureText: _hidePassword,
+                          controller: passwordController,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Enter password',
+                            contentPadding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.04,
+                              bottom: MediaQuery.of(context).size.width * 0.035,
+                              top: MediaQuery.of(context).size.width * 0.053,
+                              right: MediaQuery.of(context).size.width * 0.03,
                             ),
-                          );
-                        },
-                      ),
-            ),
-          ),
-          Expanded(
-            child: ListWheelScrollView.useDelegate(
-              controller: minuteScrollController,
-              
-              onSelectedItemChanged: (value) {
-                        setState(() {
-                          currentMinute = value;
-                        });
-                        print(currentMinute);
-                      },
-                      itemExtent: MediaQuery.of(context).size.width * 0.1,
-                      perspective: 0.01,
-                      diameterRatio: MediaQuery.of(context).size.width * 0.002,
-                      physics: FixedExtentScrollPhysics(),
-                      childDelegate: ListWheelChildBuilderDelegate(
-                        childCount: 60,
-                        builder: (context, index) {
-                          return Transform.scale(
-                            scale: currentMinute == index ? 1.0 : 0.5,
-                            child: Opacity(
-                              opacity: currentMinute == index ? 1.0 : 0.3,
-                              child: Minutes(mins: index),
+                            hintStyle: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255),
                             ),
-                          );
-                        },
-                      ),
-            ),
-          ),
-          Expanded(
-            child: ListWheelScrollView(
-              controller: amPmScrollController,
-              onSelectedItemChanged: (value) {
-                        setState(() {
-                          if (value == 0) {
-                            currentAmPm = "AM";
-                          } else {
-                            currentAmPm = "PM";
-                          }
-                        });
-                        print(currentAmPm);
-                      },
-                      itemExtent: MediaQuery.of(context).size.width * 0.1,
-                      perspective: 0.01,
-                      diameterRatio: MediaQuery.of(context).size.width * 0.002,
-                      physics: FixedExtentScrollPhysics(),
-                      children: [
-                        Transform.scale(
-                          scale: currentAmPm == "AM" ? 1.0 : 0.9,
-                          child: Opacity(
-                            opacity: currentAmPm == "AM" ? 1.0 : 0.4,
-                            child: Center(
-                              child: Text(
-                                "AM",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width *
-                                          0.07,
-                                ),
-                              ),
-                            ),
+                          ),
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
                           ),
                         ),
-                        Transform.scale(
-                          scale: currentAmPm == "PM" ? 1.0 : 0.5,
-                          child: Opacity(
-                            opacity: currentAmPm == "PM" ? 1.0 : 0.4,
-                            child: Center(
-                              child: Text(
-                                "PM",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width *
-                                          0.07,
-                                ),
-                              ),
-                            ),
+                      ),
+                      // eye icon
+                      GestureDetector(
+                        onTap: () {
+                          print("Eye icon pressed");
+                          setState(() {
+                            _isEyeIconPressed = !_isEyeIconPressed;
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.04),
+                          child: Image.asset(
+                            _isEyeIconPressed
+                                ? 'assets/openeyeicon.png'
+                                : 'assets/eyeicon.png',
+                            width: MediaQuery.of(context).size.width * 0.05,
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            color: _isEyeIconPressed
+                                ? Color.fromRGBO(203, 124, 229, 1)
+                                : null,
                           ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // space after password dabba
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                // forgot password
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width * 0.032,
+                    ),
+                  ),
+                ),
+                // space after forgot password
+                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                GestureDetector(
+                  onTapDown: (_) => setState(() => _isSignInPressed = true),
+                  onTapUp: (_) => setState(() => _isSignInPressed = false),
+                  onTapCancel: () => setState(() => _isSignInPressed = false),
+                  onTap: () {
+                    print("Sign in button pressed");
+                    print(nameController.text);
+                    print(passwordController.text);
+                    authenticateUser(context);
+                  },
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 200),
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: _isSignInPressed
+                              ? Colors.white
+                              : Color(0x3d9471cf),
+                          offset: Offset(0, 4),
+                          blurRadius: _isSignInPressed ? 24 : 16,
                         ),
                       ],
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: _isSignInPressed
+                            ? [
+                                Color(0xff6e54f7),
+                                Color(0xffc847f4),
+                              ]
+                            : [
+                                Color(0xffc847f4),
+                                Color(0xff6e54f7),
+                              ],
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Sign in",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontFamily: "Cupertino",
+                          letterSpacing: 0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * 0.1,
+                      vertical: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                  ),
+                ),
+                // space after sign in button
+                SizedBox(height: MediaQuery.of(context).size.height * 0.12),
+                Container(
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.1,
+                    right: MediaQuery.of(context).size.width * 0.1,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          color: Colors.white,
+                          thickness: 0.8,
+                        ),
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                      Text(
+                        "or",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                        ),
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                      Expanded(
+                        child: Divider(
+                          color: Colors.white,
+                          thickness: 0.8,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // space after or line
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Image.asset(
+                          'assets/applelogo.png',
+                        ),
+                        Image.asset(
+                          'assets/googlelogo.png',
+                        ),
+                        Image.asset(
+                          'assets/facebooklogo.png',
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                // space after social media icons
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                RichText(
+                    text: TextSpan(
+                      text: "Don’t have an account? ",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontFamily: "Cupertino",
+                        letterSpacing: 0,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "Sign up",
+                          style: TextStyle(
+                            color: Color.fromRGBO(203, 124, 229, 1),
+                            fontWeight: FontWeight.bold,
+                            decoration: _isSignUpPressed
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                            // Add a glow effect
+                            shadows: _isSignUpPressed
+                                ? [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(203, 124, 229, 0.8),
+                                      blurRadius: 16,
+                                      spreadRadius: 4,
+                                    ),
+                                  ]
+                                : [],
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTapDown = (_) {
+                              setState(() {
+                                _isSignUpPressed = true;
+                              });
+                            }
+                            ..onTapUp = (_) {
+                              setState(() {
+                                _isSignUpPressed = false;
+                              });
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpPage()),
+                              );
+                            }
+                            ..onTapCancel = () {
+                              setState(() {
+                                _isSignUpPressed = false;
+                              });
+                            },
+                        ),
+                      ],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                // Add more Text widgets or other widgets for additional children
+              ],
             ),
           ),
-
-          // Rest of your code
-        ],
-      ),
+        );
+      }),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
