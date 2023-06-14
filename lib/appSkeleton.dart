@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:project/welcome.dart';
 import 'home.dart';
 import 'AddTaskPage.dart';
 import 'ScheduledTasks.dart';
@@ -30,10 +31,11 @@ class AppSkeleton extends StatefulWidget {
 }
 
 class _AppSkeletonState extends State<AppSkeleton> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   final List<Widget> _pages = [
     HomePage(),
-    AddTaskPage(),
+    //AddTaskPage(),
+    TestWidget(),
     ScheduledTasks(),
     SettingsPage(),
   ];

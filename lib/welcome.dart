@@ -19,22 +19,18 @@ class _WelcomePageState extends State<WelcomePage> {
     return MaterialApp(
       home: Builder(builder: (BuildContext context) {
         return Scaffold(
+          backgroundColor: const Color(0xff212327),
           body: Container(
-            // background color
-            color: Color(0xff212327),
             // padding around borders
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.038),
             child: Column(
               children: [
-                // welcome!
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.12, // diff of 25
-                  left: 0,
-                  right: 0,
-                  child: Text(
-                    "Welcome!",
-                    key: Key("welcomeKey"),
-                    textAlign: TextAlign.left,
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+                // welcome set kaambun text
+                RichText(
+                  text: TextSpan(
+                    text: "Welcome!\n",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: MediaQuery.of(context).size.height * 0.037,
@@ -42,231 +38,153 @@ class _WelcomePageState extends State<WelcomePage> {
                       fontFamily: "Cupertino",
                       letterSpacing: 0,
                     ),
+                    children: [
+                      TextSpan(
+                        text: "Set ",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.height * 0.035,
+                          fontFamily: "Cupertino",
+                          letterSpacing: 0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      TextSpan(
+                        text: "kaamBun",
+                        style: TextStyle(
+                          color: Color.fromRGBO(203, 124, 229, 1),
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      TextSpan(
+                        text: " to achieve your goals and dreams",
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height * 0.035,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-
-                // set kaamBun to achieve
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.16,
-                  left: 0,
-                  right: 0,
-                  child: RichText(
-                    text: TextSpan(
-                      text: "Set ",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.height * 0.035,
-                        fontFamily: "Cupertino",
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.w500,
-                      ),
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                // sunset picture 🥰
+                Image.asset(
+                  "assets/sunset.png",
+                  fit: BoxFit.cover,
+                ),
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+                // dabba 1
+                GestureDetector(
+                  onTap: () {
+                    print("Container clicked");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainPage()),
+                    );
+                    // Display relevant message or perform desired action
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.066,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(77, 77, 77, 0.9),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: EdgeInsets.all(19), // Add padding on all sides
+                    child: Row(
                       children: [
-                        TextSpan(
-                          text: "kaamBun ",
-                          style: TextStyle(
-                            color: Color.fromRGBO(203, 124, 229, 1),
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "to achieve your goals and dreams",
+                        // Your text widget goes here
+                        Text(
+                          "I want to wake up on time",
                           style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.w500,
+                            fontSize: MediaQuery.of(context).size.width * 0.042,
+                            fontFamily: "Cupertino",
+                            letterSpacing: 0,
                           ),
                         ),
+                        // sized box to push text down
                       ],
                     ),
-                    textAlign: TextAlign.left,
                   ),
                 ),
-
-                // image
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.27,
-                  left: 0,
-                  right: 0,
-                  child: Image.asset(
-                    "assets/sunset.png",
-                    key: Key("welcomeImageKey"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-
-                // dabba1
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  top: MediaQuery.of(context).size.height * 0.65,
-                  child: Column(
-                    children: [
-                      Container(
-                        key: Key("dabba1Key"),
-                        // dabba dimentions
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.066,
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(77, 77, 77, 0.9),
-                          borderRadius: BorderRadius.circular(10),
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+                // dabba 2
+                GestureDetector(
+                  onTap: () {
+                    print("Container 2 clicked");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainPage()),
+                    );
+                    // Display relevant message or perform desired action
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.066,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(77, 77, 77, 0.9),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: EdgeInsets.all(19), // Add padding on all sides
+                    child: Row(
+                      children: [
+                        Text(
+                          "I want to be more organized",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width * 0.042,
+                            fontFamily: "Cupertino",
+                            letterSpacing: 0,
+                          ),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // add home screen here
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
-                          );
-                        },
-                      ),
-                    ],
+                        // sized box to push text down
+                      ],
+                    ),
                   ),
                 ),
-
-                // dabba1text
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.672,
-                  left: MediaQuery.of(context).size.width * 0.05,
-                  right: 0,
-                  child: Column(
-                    children: [
-                      Text(
-                        "I want to wake up on time",
-                        key: Key("dabba1textKey"),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width * 0.042,
-                          fontFamily: "Cupertino",
-                          letterSpacing: 0,
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+                // dabba 3
+                GestureDetector(
+                  onTap: () {
+                    print("Container 3 clicked");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainPage()),
+                    );
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.066,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(77, 77, 77, 0.9),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: EdgeInsets.all(19), // Add padding on all sides
+                    child: Row(
+                      children: [
+                        // Your text widget goes here
+                        Text(
+                          "I want to be more productive",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width * 0.042,
+                            fontFamily: "Cupertino",
+                            letterSpacing: 0,
+                          ),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
-                          );
-                        },
-                      ),
-                    ],
+                        // sized box to push text down
+                      ],
+                    ),
                   ),
                 ),
-
-                // dabba2
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  top: MediaQuery.of(context).size.height * 0.73,
-                  child: Column(
-                    children: [
-                      Container(
-                        key: Key("dabba2Key"),
-                        // dabba dimentions
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.066,
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(77, 77, 77, 0.9),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // add home screen here
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-
-                // dabba2text
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.752,
-                  left: MediaQuery.of(context).size.width * 0.05,
-                  right: 0,
-                  child: Column(
-                    children: [
-                      Text(
-                        "I want to be more organised",
-                        key: Key("dabba2textKey"),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width * 0.042,
-                          fontFamily: "Cupertino",
-                          letterSpacing: 0,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                ),
-
-                // dabba3
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  top: MediaQuery.of(context).size.height * 0.81,
-                  child: Column(
-                    children: [
-                      Container(
-                        key: Key("dabba3Key"),
-                        // dabba dimentions
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: MediaQuery.of(context).size.height * 0.066,
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(77, 77, 77, 0.9),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // add home screen here
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-
-                // dabba3text
-                Positioned(
-                  top: MediaQuery.of(context).size.height * 0.831,
-                  left: MediaQuery.of(context).size.width * 0.05,
-                  right: 0,
-                  child: Column(
-                    children: [
-                      Text(
-                        "I want to be more productive",
-                        key: Key("dabba3textKey"),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width * 0.042,
-                          fontFamily: "Cupertino",
-                          letterSpacing: 0,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-
-                Container(),
-                // stack requires empty non positioned widget to work properly.
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
               ],
             ),
           ),

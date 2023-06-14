@@ -1,190 +1,137 @@
-// ignore_for_file: use_key_in_widget_constructors, unnecessary_import, prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, file_names, unused_import
-import 'dart:ui';
-import 'dart:io';
+// ignore_for_file:  prefer_const_literals_to_create_immutables, file_names, library_private_types_in_public_api, avoid_print
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'home.dart';
-import 'AppSkeleton.dart';
+import 'package:project/Hours.dart';
+import 'package:project/Minutes.dart';
+
+class TaskData {
+  final String taskName;
+  final String subTaskName;
+  final int currentHour;
+  final int currentMinute;
+  final String currentAmPm;
+  final double sliderValue;
+
+  TaskData({
+    required this.taskName,
+    required this.subTaskName,
+    required this.currentHour,
+    required this.currentMinute,
+    required this.currentAmPm,
+    required this.sliderValue,
+  });
+}
+
+class CustomButton extends StatefulWidget {
+  final String weekday;
+
+  const CustomButton(this.weekday, {super.key});
+
+  @override
+  _CustomButtonState createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
+  bool isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isPressed = !isPressed;
+        });
+      },
+      child: Container(
+        height: MediaQuery.of(context).size.width * 0.09,
+        width: MediaQuery.of(context).size.width * 0.125,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          gradient: isPressed
+              ? const LinearGradient(
+                  colors: [
+                    Color.fromRGBO(77, 77, 77, 0.9),
+                    Color.fromRGBO(77, 77, 77, 0.9),
+                  ],
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  stops: [0.0, 1.0],
+                )
+              : const LinearGradient(
+                  colors: [
+                    Color(0xff6e54f7),
+                    Color(0xffc847f4),
+                  ],
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  stops: [0.0, 1.0],
+                ),
+        ),
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+        child: Center(
+          child: Text(
+            widget.weekday,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: MediaQuery.of(context).size.width * 0.037,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class TestWidget extends StatefulWidget {
-  const TestWidget({super.key});
+  // ignore: use_key_in_widget_constructors
+  const TestWidget({Key? key});
 
   @override
   State<TestWidget> createState() => _TestWidgetState();
+
+  void onSave() {}
 }
 
 class _TestWidgetState extends State<TestWidget> {
+  TextEditingController taskNameController = TextEditingController();
+  TextEditingController subTaskNameController = TextEditingController();
+  int currentHour = 1;
+  int currentMinute = 0;
+  String currentAmPm = "AM";
+  double sliderValue = 0.0;
+  bool isEditing = false;
+  Color penColor = Colors.white;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  List<int> hoursList = List<int>.generate(12, (index) => index + 1);
+  List<int> minutesList = List<int>.generate(60, (index) => index);
+ 
+
+  // snackbar
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(milliseconds: 300),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Builder(builder: (BuildContext context) {
-        return Scaffold(
-          backgroundColor: const Color(0xff212327),
-          body: Container(
-            // padding around borders
-            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.038),
-            child: Column(
+    return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: const Color(0xff212327),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
+            child: Row(
               children: [
-                // sized box to push text down
-                SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-                // welcome set kaambun text
-                RichText(
-                  text: TextSpan(
-                    text: "Welcome!\n",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.height * 0.037,
-                      fontWeight: FontWeight.w800,
-                      fontFamily: "Cupertino",
-                      letterSpacing: 0,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: "Set ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height * 0.035,
-                          fontFamily: "Cupertino",
-                          letterSpacing: 0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      TextSpan(
-                        text: "kaamBun",
-                        style: TextStyle(
-                          color: Color.fromRGBO(203, 124, 229, 1),
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      TextSpan(
-                        text: " to achieve your goals and dreams",
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * 0.035,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // sized box to push text down
-                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                // sunset picture 🥰
-                Image.asset(
-                  "assets/sunset.png",
-                  key: Key("welcomeImageKey"),
-                  fit: BoxFit.cover,
-                ),
-                // sized box to push text down
-                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
-                // dabba 1
-                GestureDetector(
-                  onTap: () {
-                    print("Container clicked");
-                    // Display relevant message or perform desired action
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.066,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(77, 77, 77, 0.9),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: EdgeInsets.all(19), // Add padding on all sides
-                    child: Row(
-                      children: [
-                        // Your text widget goes here
-                        Text(
-                          "I want to wake up on time",
-                          key: Key("dabba1textKey"),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: MediaQuery.of(context).size.width * 0.042,
-                            fontFamily: "Cupertino",
-                            letterSpacing: 0,
-                          ),
-                        ),
-                        // sized box to push text down
-                      ],
-                    ),
-                  ),
-                ),
-                // sized box to push text down
-                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
-                // dabba 2
-                GestureDetector(
-                  onTap: () {
-                    print("Container clicked");
-                    // Display relevant message or perform desired action
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.066,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(77, 77, 77, 0.9),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: EdgeInsets.all(19), // Add padding on all sides
-                    child: Row(
-                      children: [
-                        Text(
-                          "I want to be more organized",
-                          key: Key("dabba1textKey"),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: MediaQuery.of(context).size.width * 0.042,
-                            fontFamily: "Cupertino",
-                            letterSpacing: 0,
-                          ),
-                        ),
-                        // sized box to push text down
-                      ],
-                    ),
-                  ),
-                ),
-                // sized box to push text down
-                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
-               // dabba 3
-                GestureDetector(
-                  onTap: () {
-                    print("Container clicked");
-                    // Display relevant message or perform desired action
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.066,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(77, 77, 77, 0.9),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: EdgeInsets.all(19), // Add padding on all sides
-                    child: Row(
-                      children: [
-                        // Your text widget goes here
-                        Text(
-                          "I want to be more productive",
-                          key: Key("dabba1textKey"),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: MediaQuery.of(context).size.width * 0.042,
-                            fontFamily: "Cupertino",
-                            letterSpacing: 0,
-                          ),
-                        ),
-                        // sized box to push text down
-                      ],
-                    ),
-                  ),
-                ),
-                // sized box to push text down
-                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
-               
               ],
             ),
           ),
-        );
-      }),
-      debugShowCheckedModeBanner: false,
+        ],
+      ),
     );
   }
 }

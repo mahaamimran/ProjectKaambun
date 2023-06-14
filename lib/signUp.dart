@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
       print("user authenticated");
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => SignInPage()),
+        MaterialPageRoute(builder: (context) => WelcomePage()),
         // change this to welcome page
       );
     }

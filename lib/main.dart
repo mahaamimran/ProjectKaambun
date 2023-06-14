@@ -13,5 +13,5 @@ import 'SettingsPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(TestWidget());
+  runApp(MainPage());
 }
