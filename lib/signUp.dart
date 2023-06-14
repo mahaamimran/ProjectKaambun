@@ -20,45 +20,38 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _hidePassword = true;
   bool _isEyeIconPressed = false;
   void authenticateUser(BuildContext context) {
-    if (nameController.text == "mahamimran" &&
-        passwordController.text == "Maham##2") {
+   String message = "";
+
+   if (passwordController.text.isEmpty) {
+    message = "Please enter a password.";
+  } else if (passwordController.text.length < 8) {
+    message = "Password must be at least 8 characters long.";
+  } else if (!RegExp(r'[A-Z]').hasMatch(passwordController.text)) {
+    message = "Password must contain at least one uppercase letter.";
+  } else if (!RegExp(r'[a-z]').hasMatch(passwordController.text)) {
+    message = "Password must contain at least one lowercase letter.";
+  } else if (!RegExp(r'[0-9]').hasMatch(passwordController.text)) {
+    message = "Password must contain at least one digit.";
+  } else if (!RegExp(r'[!@#\$&*~]').hasMatch(passwordController.text)) {
+    message = "Password must contain at least one special character (!@#\$&*~).";
+  }
+  else {
       print("user authenticated");
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => WelcomePage()),
-      );
-    } else if (nameController.text == "mahamimran" &&
-        passwordController.text != "Maham##2") {
-      print("invalid password");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Invalid password.'),
-        ),
-      );
-    } else if (nameController.text != "mahamimran" &&
-        passwordController.text == "Maham##2") {
-      print("invalid username");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Invalid username.'),
-        ),
-      );
-    } else if (nameController.text == "" && passwordController.text == "") {
-      print("Please fill in both the username and password fields.");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('fill in both the username and password fields.'),
-        ),
-      );
-    } else {
-      print("invalid username and password");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Invalid username and password.'),
-        ),
+        MaterialPageRoute(builder: (context) => SignInPage()),
+        // change this to welcome page
       );
     }
-  }
+  if (message.isNotEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 1),
+      ),
+    );
+  } 
+}
 
   @override
   Widget build(BuildContext context) {
@@ -250,7 +243,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     "By signing up you agree to our terms & conditions",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.032,
+                      fontSize: MediaQuery.of(context).size.width * 0.03,
                     ),
                   ),
                 ),

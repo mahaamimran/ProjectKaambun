@@ -1,7 +1,10 @@
+// ignore_for_file: use_key_in_widget_constructors, unnecessary_import, prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, file_names, unused_import
+import 'dart:ui';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:project/welcome.dart';
-import 'signUp.dart';
+import 'home.dart';
+import 'AppSkeleton.dart';
 
 class TestWidget extends StatefulWidget {
   const TestWidget({super.key});
@@ -11,361 +14,171 @@ class TestWidget extends StatefulWidget {
 }
 
 class _TestWidgetState extends State<TestWidget> {
-  // username and password input controllers
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  // sign in button pressed
-  bool _isSignInPressed = false;
-  bool _isSignUpPressed = false;
-  bool _hidePassword = true;
-  bool _isEyeIconPressed = false;
-  void authenticateUser(BuildContext context) {
-    if (nameController.text == "mahamimran" &&
-        passwordController.text == "Maham##2") {
-      print("user authenticated");
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => WelcomePage()),
-      );
-    } else if (nameController.text == "mahamimran" &&
-        passwordController.text != "Maham##2") {
-      print("invalid password");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Invalid password.'),
-        ),
-      );
-    } else if (nameController.text != "mahamimran" &&
-        passwordController.text == "Maham##2") {
-      print("invalid username");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Invalid username.'),
-        ),
-      );
-    } else if (nameController.text == "" && passwordController.text == "") {
-      print("Please fill in both the username and password fields.");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('fill in both the username and password fields.'),
-        ),
-      );
-    } else {
-      print("invalid username and password");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Invalid username and password.'),
-        ),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Builder(builder: (BuildContext context) {
         return Scaffold(
-          backgroundColor: Color(0xff212327),
+          backgroundColor: const Color(0xff212327),
           body: Container(
-            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+            // padding around borders
+            padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.038),
             child: Column(
               children: [
-                // top space
+                // sized box to push text down
                 SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-                // welcome back
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Welcome back!",
+                // welcome set kaambun text
+                RichText(
+                  text: TextSpan(
+                    text: "Welcome!\n",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.075,
-                      fontWeight: FontWeight.bold,
+                      fontSize: MediaQuery.of(context).size.height * 0.037,
+                      fontWeight: FontWeight.w800,
+                      fontFamily: "Cupertino",
+                      letterSpacing: 0,
                     ),
-                  ),
-                ),
-                // space after welcome back
-                SizedBox(height: MediaQuery.of(context).size.height * 0.003),
-                // you've been missed
-                Text(
-                  "you've been missed",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.width * 0.04,
-                  ),
-                ),
-                // space after you've been missed
-                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                // username dabba
-                Container(
-                  // dabba dimentions
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.068,
-                  decoration: BoxDecoration(
-                    color: Color(0xff393c41),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Enter username',
-                      contentPadding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.04,
-                          bottom: MediaQuery.of(context).size.width * 0.035,
-                          top: MediaQuery.of(context).size.width * 0.053,
-                          right: MediaQuery.of(context).size.width * 0.03),
-                      hintStyle:
-                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                    ),
-                    // input white
-                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-                  ),
-                ),
-                // space after username dabba
-                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                // password dabba
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.068,
-                  decoration: BoxDecoration(
-                    color: Color(0xff393c41),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
                     children: [
-                      Expanded(
-                        child: TextField(
-                          obscureText: _hidePassword,
-                          controller: passwordController,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Enter password',
-                            contentPadding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width * 0.04,
-                              bottom: MediaQuery.of(context).size.width * 0.035,
-                              top: MediaQuery.of(context).size.width * 0.053,
-                              right: MediaQuery.of(context).size.width * 0.03,
-                            ),
-                            hintStyle: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                            ),
-                          ),
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                          ),
-                        ),
-                      ),
-                      // eye icon
-                      GestureDetector(
-                        onTap: () {
-                          print("Eye icon pressed");
-                          setState(() {
-                            _isEyeIconPressed = !_isEyeIconPressed;
-                            _hidePassword = !_hidePassword;
-                          });
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              right: MediaQuery.of(context).size.width * 0.04),
-                          child: Image.asset(
-                            _isEyeIconPressed
-                                ? 'assets/openeyeicon.png'
-                                : 'assets/eyeicon.png',
-                            width: MediaQuery.of(context).size.width * 0.05,
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            color: _isEyeIconPressed
-                                ? Color.fromRGBO(203, 124, 229, 1)
-                                : null,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // space after password dabba
-                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                // forgot password
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "Forgot Password?",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.032,
-                    ),
-                  ),
-                ),
-                // space after forgot password
-                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                GestureDetector(
-                  onTapDown: (_) => setState(() => _isSignInPressed = true),
-                  onTapUp: (_) => setState(() => _isSignInPressed = false),
-                  onTapCancel: () => setState(() => _isSignInPressed = false),
-                  onTap: () {
-                    print("Sign in button pressed");
-                    print(nameController.text);
-                    print(passwordController.text);
-                    authenticateUser(context);
-                  },
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 200),
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: _isSignInPressed
-                              ? Colors.white
-                              : Color(0x3d9471cf),
-                          offset: Offset(0, 4),
-                          blurRadius: _isSignInPressed ? 24 : 16,
-                        ),
-                      ],
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: _isSignInPressed
-                            ? [
-                                Color(0xff6e54f7),
-                                Color(0xffc847f4),
-                              ]
-                            : [
-                                Color(0xffc847f4),
-                                Color(0xff6e54f7),
-                              ],
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Sign in",
+                      TextSpan(
+                        text: "Set ",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontSize: MediaQuery.of(context).size.height * 0.035,
                           fontFamily: "Cupertino",
                           letterSpacing: 0,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.1,
-                      vertical: MediaQuery.of(context).size.height * 0.02,
-                    ),
-                  ),
-                ),
-                // space after sign in button
-                SizedBox(height: MediaQuery.of(context).size.height * 0.12),
-                Container(
-                  padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.1,
-                    right: MediaQuery.of(context).size.width * 0.1,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          color: Colors.white,
-                          thickness: 0.8,
-                        ),
-                      ),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                      Text(
-                        "or",
+                      TextSpan(
+                        text: "kaamBun",
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          color: Color.fromRGBO(203, 124, 229, 1),
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                      Expanded(
-                        child: Divider(
+                      TextSpan(
+                        text: " to achieve your goals and dreams",
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height * 0.035,
                           color: Colors.white,
-                          thickness: 0.8,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
                   ),
                 ),
-                // space after or line
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Image.asset(
-                          'assets/applelogo.png',
-                        ),
-                        Image.asset(
-                          'assets/googlelogo.png',
-                        ),
-                        Image.asset(
-                          'assets/facebooklogo.png',
-                        ),
-                      ],
-                    ),
-                  ],
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                // sunset picture 🥰
+                Image.asset(
+                  "assets/sunset.png",
+                  key: Key("welcomeImageKey"),
+                  fit: BoxFit.cover,
                 ),
-                // space after social media icons
-                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                RichText(
-                    text: TextSpan(
-                      text: "Don’t have an account? ",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontFamily: "Cupertino",
-                        letterSpacing: 0,
-                      ),
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+                // dabba 1
+                GestureDetector(
+                  onTap: () {
+                    print("Container clicked");
+                    // Display relevant message or perform desired action
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.066,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(77, 77, 77, 0.9),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: EdgeInsets.all(19), // Add padding on all sides
+                    child: Row(
                       children: [
-                        TextSpan(
-                          text: "Sign up",
+                        // Your text widget goes here
+                        Text(
+                          "I want to wake up on time",
+                          key: Key("dabba1textKey"),
                           style: TextStyle(
-                            color: Color.fromRGBO(203, 124, 229, 1),
-                            fontWeight: FontWeight.bold,
-                            decoration: _isSignUpPressed
-                                ? TextDecoration.underline
-                                : TextDecoration.none,
-                            // Add a glow effect
-                            shadows: _isSignUpPressed
-                                ? [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(203, 124, 229, 0.8),
-                                      blurRadius: 16,
-                                      spreadRadius: 4,
-                                    ),
-                                  ]
-                                : [],
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width * 0.042,
+                            fontFamily: "Cupertino",
+                            letterSpacing: 0,
                           ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTapDown = (_) {
-                              setState(() {
-                                _isSignUpPressed = true;
-                              });
-                            }
-                            ..onTapUp = (_) {
-                              setState(() {
-                                _isSignUpPressed = false;
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUpPage()),
-                              );
-                            }
-                            ..onTapCancel = () {
-                              setState(() {
-                                _isSignUpPressed = false;
-                              });
-                            },
                         ),
+                        // sized box to push text down
                       ],
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                // Add more Text widgets or other widgets for additional children
+                ),
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+                // dabba 2
+                GestureDetector(
+                  onTap: () {
+                    print("Container clicked");
+                    // Display relevant message or perform desired action
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.066,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(77, 77, 77, 0.9),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: EdgeInsets.all(19), // Add padding on all sides
+                    child: Row(
+                      children: [
+                        Text(
+                          "I want to be more organized",
+                          key: Key("dabba1textKey"),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width * 0.042,
+                            fontFamily: "Cupertino",
+                            letterSpacing: 0,
+                          ),
+                        ),
+                        // sized box to push text down
+                      ],
+                    ),
+                  ),
+                ),
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+               // dabba 3
+                GestureDetector(
+                  onTap: () {
+                    print("Container clicked");
+                    // Display relevant message or perform desired action
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.066,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(77, 77, 77, 0.9),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: EdgeInsets.all(19), // Add padding on all sides
+                    child: Row(
+                      children: [
+                        // Your text widget goes here
+                        Text(
+                          "I want to be more productive",
+                          key: Key("dabba1textKey"),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width * 0.042,
+                            fontFamily: "Cupertino",
+                            letterSpacing: 0,
+                          ),
+                        ),
+                        // sized box to push text down
+                      ],
+                    ),
+                  ),
+                ),
+                // sized box to push text down
+                SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+               
               ],
             ),
           ),

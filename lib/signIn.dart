@@ -79,7 +79,7 @@ class _SignInPageState extends State<SignInPage> {
                     "Welcome back!",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.width * 0.075,
+                       fontSize: MediaQuery.of(context).size.width * 0.075,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

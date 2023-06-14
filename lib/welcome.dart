@@ -24,7 +24,7 @@ class _WelcomePageState extends State<WelcomePage> {
             color: Color(0xff212327),
             // padding around borders
             padding: EdgeInsets.all(20.0),
-            child: Stack(
+            child: Column(
               children: [
                 // welcome!
                 Positioned(
@@ -140,7 +140,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           letterSpacing: 0,
                         ),
                       ),
-                       GestureDetector(
+                      GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
@@ -200,8 +200,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {
-                        },
+                        onTap: () {},
                       ),
                     ],
                   ),
