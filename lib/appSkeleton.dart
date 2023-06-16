@@ -34,8 +34,8 @@ class _AppSkeletonState extends State<AppSkeleton> {
   int _selectedIndex = 1;
   final List<Widget> _pages = [
     HomePage(),
-    //AddTaskPage(),
-    TestWidget(),
+    AddTaskPage(),
+    //TestWidget(),
     ScheduledTasks(),
     SettingsPage(),
   ];
