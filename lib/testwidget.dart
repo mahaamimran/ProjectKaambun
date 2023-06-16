@@ -246,24 +246,28 @@ class _TestWidgetState extends State<TestWidget> {
                     ],
                   ),
                   // space between repeat and weekdays
-                  SizedBox(
-                    height: MediaQuery.of(context).size.width * 0.03,
+                  Expanded(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.width * 0.03,
+                    ),
                   ),
                   // weekdays
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      for (var weekday in [
-                        'Mon',
-                        'Tue',
-                        'Wed',
-                        'Thu',
-                        'Fri',
-                        'Sat',
-                        'Sun'
-                      ])
-                        CustomButton(weekday),
-                    ],
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        for (var weekday in [
+                          'Mon',
+                          'Tue',
+                          'Wed',
+                          'Thu',
+                          'Fri',
+                          'Sat',
+                          'Sun'
+                        ])
+                          CustomButton(weekday),
+                      ],
+                    ),
                   ),
 
                   // space between weekdays and subtasks
@@ -376,9 +380,6 @@ class _TestWidgetState extends State<TestWidget> {
                 ],
               ),
             ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.width * 0.25,
           ),
         ],
       ),
