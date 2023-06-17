@@ -249,10 +249,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           });
                           print(currentAmPm);
                         },
-                        itemExtent: MediaQuery.of(context).size.width * 0.1,
-                        perspective: 0.00005,
-                        diameterRatio:
-                            MediaQuery.of(context).size.width * 0.002,
+                      itemExtent: MediaQuery.of(context).size.width * 0.1,
+                        perspective: 0.005,
+                        diameterRatio: 1.5,
                         physics: const FixedExtentScrollPhysics(),
                         children: [
                           Transform.scale(
