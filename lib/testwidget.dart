@@ -1,475 +1,385 @@
-
+// ignore_for_file: use_key_in_widget_constructors, unnecessary_import, prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, file_names, unused_import
+import 'dart:ui';
+import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:project/Hours.dart';
-import 'package:project/Minutes.dart';
-
-class TaskData {
-  final String taskName;
-  final String subTaskName;
-  final int currentHour;
-  final int currentMinute;
-  final String currentAmPm;
-  final double sliderValue;
-
-  TaskData({
-    required this.taskName,
-    required this.subTaskName,
-    required this.currentHour,
-    required this.currentMinute,
-    required this.currentAmPm,
-    required this.sliderValue,
-  });
-}
-
-class CustomButton extends StatefulWidget {
-  final String weekday;
-
-  const CustomButton(this.weekday, {super.key});
-
-  @override
-  _CustomButtonState createState() => _CustomButtonState();
-}
-
-class _CustomButtonState extends State<CustomButton> {
-  bool isPressed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          isPressed = !isPressed;
-        });
-      },
-      child: Container(
-        height: MediaQuery.of(context).size.width * 0.09,
-        width: MediaQuery.of(context).size.width * 0.125,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          gradient: isPressed
-              ? const LinearGradient(
-                  colors: [
-                    Color.fromRGBO(77, 77, 77, 0.9),
-                    Color.fromRGBO(77, 77, 77, 0.9),
-                  ],
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  stops: [0.0, 1.0],
-                )
-              : const LinearGradient(
-                  colors: [
-                    Color(0xff6e54f7),
-                    Color(0xffc847f4),
-                  ],
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  stops: [0.0, 1.0],
-                ),
-        ),
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
-        child: Center(
-          child: Text(
-            widget.weekday,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: MediaQuery.of(context).size.width * 0.037,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+import 'package:flutter/gestures.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:project/home.dart';
+import 'AddTaskPage.dart';
+import 'ScheduledTasks.dart';
+import 'SettingsPage.dart';
 
 class TestWidget extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const TestWidget({Key? key});
-
+  const TestWidget({super.key});
   @override
   State<TestWidget> createState() => _TestWidgetState();
-
-  void onSave() {}
 }
 
 class _TestWidgetState extends State<TestWidget> {
-  TextEditingController taskNameController = TextEditingController();
-  TextEditingController subTaskNameController = TextEditingController();
-  int currentHour = 1;
-  int currentMinute = 0;
-  String currentAmPm = "AM";
-  double sliderValue = 0.0;
-  bool isEditing = false;
-  bool isAlarmEnabled = false; // Initially, the alarm is disabled
-  Color penColor = Colors.white;
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<int> hoursList = List<int>.generate(12, (index) => index + 1);
-  List<int> minutesList = List<int>.generate(60, (index) => index);
+  bool isContainerClicked = false;
+  List<String> quotes = [
+    "Until we can manage time, we can manage nothing else",
+    "Time is what we want most, but what we use worst",
+    "Lost time is never found again",
+  ];
+  List<String> names = [
+    "- Peter Drucker",
+    "- William Penn",
+    "- Benjamin Franklin",
+  ];
+  int randomIndex = 0;
+  List<String> randomParts = [
+    "something random part 1 🕺🏻",
+    "something random part 2 💃🏻",
+    "something random part 3 🕺🏻",
+    "something random part 4 💃🏻",
+    "something random part 5 🕺🏻",
+    "something random part 6 💃🏻",
+  ];
+  @override
+  void initState() {
+    super.initState();
+    refreshRandomIndex();
+  }
 
-  // snackbar
-  void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(milliseconds: 300),
-      ),
-    );
+  void refreshRandomIndex() {
+    setState(() {
+      randomIndex = Random().nextInt(quotes.length);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: const Color(0xff212327),
-      body: Padding(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.035),
-        child: Column(
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  // Task Name
-                  Expanded(
-                    child: TextField(
-                      controller: taskNameController,
-                      enabled: isEditing,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Task Name',
-                        hintStyle: const TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
+    return MaterialApp(
+      home: Builder(builder: (BuildContext context) {
+        return Scaffold(
+          backgroundColor: const Color(0xff212327),
+          body: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.04,
+                vertical: MediaQuery.of(context).size.height * 0.01),
+            child: ListView(
+              children: [
+                // motvational quote container
+                Container(
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "Highlights",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width * 0.06,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                      style: TextStyle(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        fontSize: MediaQuery.of(context).size.width * 0.04,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Cupertino",
-                        letterSpacing: 0,
-                      ),
-                    ),
-                  ),
-
-                  // clicking on the pen icon will enable editing
-                  // toggles color of pen icon
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isEditing = !isEditing;
-                        penColor = isEditing
-                            ? const Color.fromRGBO(203, 124, 229, 1)
-                            : Colors.white;
-                      });
-                      isEditing
-                          ? _showSnackBar("Editing Enabled")
-                          : _showSnackBar("Editing Disabled");
-                    },
-                    child: Image.asset(
-                      'assets/editpen.png',
-                      color: penColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(),
-            ),
-            // items
-            Expanded(
-              flex: 4,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * 0.09),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ListWheelScrollView.useDelegate(
-                        onSelectedItemChanged: (value) {
-                          setState(() {
-                            currentHour = hoursList[value];
-                          });
-                          print(currentHour);
-                          // ADD VALIDATION HERE
-                        },
-                        itemExtent: MediaQuery.of(context).size.width * 0.1,
-                        perspective: 0.005,
-                        diameterRatio: 1.5,
-                        physics: const FixedExtentScrollPhysics(),
-                        childDelegate: ListWheelChildLoopingListDelegate(
-                          children: hoursList.map((hour) {
-                            return Transform.scale(
-                              scale: currentHour == hour ? 1.5 : 0.6,
-                              child: Opacity(
-                                opacity: currentHour == hour ? 1.0 : 0.3,
-                                child: Hours(hour: hour),
-                              ),
-                            );
-                          }).toList(),
+                      Expanded(
+                        child: Text(
+                          quotes[randomIndex],
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width * 0.045,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                       ),
-                    ),
-                    // minutes
-                    Expanded(
-                      child: ListWheelScrollView.useDelegate(
-                        onSelectedItemChanged: (value) {
-                          setState(() {
-                            currentMinute = value;
-                          });
-                          print(currentMinute);
-                        },
-                        itemExtent: MediaQuery.of(context).size.width * 0.1,
-                        perspective: 0.005,
-                        diameterRatio: 1.5,
-                        physics: const FixedExtentScrollPhysics(),
-                        childDelegate: ListWheelChildLoopingListDelegate(
-                          children: minutesList.map((minute) {
-                            return Transform.scale(
-                              scale: currentMinute == minute ? 1.5 : 0.6,
-                              child: Opacity(
-                                opacity: currentMinute == minute ? 1.0 : 0.3,
-                                child: Minutes(mins: minute),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                    // AM/PM
-                    Expanded(
-                      child: ListWheelScrollView(
-                        onSelectedItemChanged: (value) {
-                          setState(() {
-                            if (value == 0) {
-                              currentAmPm = "AM";
-                            } else {
-                              currentAmPm = "PM";
-                            }
-                          });
-                          print(currentAmPm);
-                        },
-                        itemExtent: MediaQuery.of(context).size.width * 0.1,
-                        perspective: 0.00005,
-                        diameterRatio:
-                            MediaQuery.of(context).size.width * 0.002,
-                        physics: const FixedExtentScrollPhysics(),
-                        children: [
-                          Transform.scale(
-                            scale: currentAmPm == "AM" ? 1.5 : 0.6,
-                            child: Opacity(
-                              opacity: currentAmPm == "AM" ? 1.0 : 0.4,
-                              child: Center(
-                                child: Text(
-                                  "AM",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.07,
-                                  ),
-                                ),
-                              ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            names[randomIndex],
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Transform.scale(
-                            scale: currentAmPm == "PM" ? 1.5 : 0.6,
-                            child: Opacity(
-                              opacity: currentAmPm == "PM" ? 1.0 : 0.4,
-                              child: Center(
-                                child: Text(
-                                  "PM",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.07,
-                                  ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // padding for container
+                  height: MediaQuery.of(context).size.height * 0.17,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xffc847f4),
+                        Color(0xff6e54f7),
+                      ],
+                    ),
+                  ),
+                ),
+                // space between highlights & goal tracking
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                // goal tracking
+                Row(
+                  children: [
+                    Image.asset('assets/goaltracking.png'),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.02,
+                    ),
+                    Text(
+                      "My Stats",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: MediaQuery.of(context).size.width * 0.06,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+                // space
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.015,
+                ),
+// container for goal tracking
+                Container(
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+                  height: MediaQuery.of(context).size.height * 0.34,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(57, 111, 113, 135),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                "Today",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 189, 123, 210),
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
+                              Text(
+                                "05:30 AM",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 189, 123, 210),
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                          // sized box
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.1,
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                "Alarm",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              Text(
+                                "06:30 AM",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.1,
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                "Snoozed",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 189, 123, 210),
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              Text(
+                                "25 times",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 189, 123, 210),
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                          //add more code
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+
+                      // graph
+                      Transform.scale(
+                        scale: MediaQuery.of(context).size.width * 0.0029,
+                        child: Image.asset(
+                          'assets/graph.png',
+                          height: MediaQuery.of(context).size.height * 0.19,
+                        ),
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(7, (index) {
+                          final day = [
+                            "Sun",
+                            "Mon",
+                            "Tue",
+                            "Wed",
+                            "Thu",
+                            "Fri",
+                            "Sat"
+                          ][index];
+                          return Padding(
+                            padding: EdgeInsets.only(
+                                right:
+                                    MediaQuery.of(context).size.width * 0.04),
+                            child: Text(
+                              day,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.04,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
+                          );
+                        }),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // space between graph and workout box
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
+
+                // workout box
+                Center(
+                  child: GestureDetector(
+                    onTapDown: (TapDownDetails details) {
+                      setState(() {
+                        // Update the state variable to indicate the container is clicked
+                        isContainerClicked = true;
+                      });
+                    },
+                    onTapUp: (TapUpDetails details) {
+                      setState(() {
+                        // Update the state variable to indicate the container is released
+                        isContainerClicked = false;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(
+                          MediaQuery.of(context).size.width * 0.05),
+                      height: MediaQuery.of(context).size.height * 0.09,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: isContainerClicked
+                              ? [
+                                  Color.fromARGB(255, 143, 127, 228),
+                                  Color.fromARGB(255, 199, 120, 226),
+                                ]
+                              : [
+                                  Color.fromARGB(255, 199, 120, 226),
+                                  Color.fromARGB(255, 143, 127, 228),
+                                ],
+                        ),
+                        boxShadow: isContainerClicked
+                            ? [
+                                BoxShadow(
+                                  color: Colors.white.withOpacity(0.3),
+                                  spreadRadius: 3,
+                                  blurRadius: 7,
+                                  offset: Offset(0, 3),
+                                ),
+                              ]
+                            : [],
+                      ),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'assets/workoutsparkle.png', // Replace with the path to your image file
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            width: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.04),
+                          Text(
+                            "Workout",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.05,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.3),
+                          Image.asset(
+                            'assets/rightarrow.png',
+                            scale: MediaQuery.of(context).size.width * 0.0018,
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Repeat",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.width * 0.05,
-                    fontWeight: FontWeight.w700,
                   ),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.005,
-            ),
-            // weekdays
-            Expanded(
-              child: // weekdays
-                  Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  for (var weekday in [
-                    'Mon',
-                    'Tue',
-                    'Wed',
-                    'Thu',
-                    'Fri',
-                    'Sat',
-                    'Sun'
-                  ])
-                    CustomButton(weekday),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Sub tasks",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.width * 0.05,
-                    fontWeight: FontWeight.w700,
-                  ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
                 ),
-              ),
-            ),
-            // subtask editable
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: subTaskNameController,
-                      enabled: isEditing,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'None',
-                        hintStyle: TextStyle(
-                          color: isEditing ? Colors.white : Colors.grey,
-                        ),
-                      ),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width * 0.04,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Cupertino",
-                        letterSpacing: 0,
-                      ),
-                    ),
-                  ),
-                  Image.asset(
-                    "assets/rightarrow.png",
-                    width: MediaQuery.of(context).size.width * 0.07,
-                    scale: 0.7,
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Length of task",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.width * 0.05,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: // add slider here for length of task
-                  Slider(
-                value: sliderValue,
-                min: 0.0,
-                max: 100.0,
-                onChanged: (newValue) {
-                  setState(() {
-                    sliderValue = newValue;
-                  });
-                },
-                activeColor: const Color(0xffc847f4),
-                thumbColor: Colors.white,
-                inactiveColor: const Color.fromRGBO(77, 77, 77, 0.9),
-              ),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width *
-                          0.04), // Adjust the left padding as needed
-                  child: Text(
-                    sliderValue.round() >= 60
-                        ? '${(sliderValue.round() ~/ 60).toString()} hours ${(sliderValue.round() % 60).toString()} minutes'
-                        : '${sliderValue.round().toString()} minutes',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Alarm",
+                for (String part in randomParts)
+                  Column(
+                    children: [
+                      Text(
+                        part,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width * 0.05,
-                          fontWeight: FontWeight.w700,
+                          fontSize: 25,
                         ),
                       ),
-                    ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.03,
+                      ),
+                    ],
                   ),
-                  Switch(
-                    value: isAlarmEnabled,
-                    activeColor:const Color.fromRGBO(203, 124, 229, 1), // Customize the active color of the switch
-                    inactiveThumbColor: Colors
-                        .grey, // Customize the inactive thumb color of the switch
-                    inactiveTrackColor: Colors.grey.withOpacity(0.5),
-
-                    onChanged: (value) {
-                      setState(() {
-                        isAlarmEnabled = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

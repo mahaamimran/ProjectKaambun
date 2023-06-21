@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, unnecessary_import, prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, file_names, unused_import
 import 'dart:ui';
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -17,6 +18,30 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isContainerClicked = false;
+  List<String> quotes = [
+    "Until we can manage time, we can manage nothing else",
+    "Time is what we want most, but what we use worst",
+    "Lost time is never found again",
+  ];
+  List<String> names = [
+    "- Peter Drucker",
+    "- William Penn",
+    "- Benjamin Franklin",
+  ];
+  int randomIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    refreshRandomIndex();
+  }
+
+  void refreshRandomIndex() {
+    setState(() {
+      randomIndex = Random().nextInt(quotes.length);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -59,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                                       0.012,
                                 ),
                                 Text(
-                                  "Until we can manage time, we can manage nothing else",
+                                  quotes[randomIndex],
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize:
@@ -75,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: Text(
-                                    "- Peter Drucker",
+                                   names[randomIndex],
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize:
@@ -111,8 +136,7 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                  'assets/goaltracking.png'),
+                              Image.asset('assets/goaltracking.png'),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.02,
                               ),
