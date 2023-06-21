@@ -33,8 +33,8 @@ class AppSkeleton extends StatefulWidget {
 class _AppSkeletonState extends State<AppSkeleton> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
-   // HomePage(),
-    TestWidget(),
+    HomePage(),
+   // TestWidget(),
     AddTaskPage(),
     ScheduledTasks(),
     SettingsPage(),
