@@ -18,4 +18,17 @@ A comprehensive task scheduling and management app for iOS and Android devices. 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="https://github.com/mahaamimran/projectKaambun/blob/main/UI/Settings.png" alt="Settings" width="135" height="292.5">
 
+## Getting Started
+### Clone the Repository
+- Clone the project repository using the following command:
+```
+git clone https://github.com/mahaamimran/projectKaambun.git
+```
+### Set up Your Environment
+- Open your preferred (IDE) 
+- Import the source code files from the cloned repository into your IDE.
+### Run the Project
+- Make sure you have a mobile emulator or simulator set up.
+- Locate the main.dart file within the project's lib directory.
+- Run the main.dart file to launch the application on your emulator or simulator.
 ##### - Maham
