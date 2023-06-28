@@ -10,6 +10,8 @@ A comprehensive task scheduling and management app for iOS and Android devices. 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="https://github.com/mahaamimran/projectKaambun/blob/main/UI/SignUp.png" alt="Sign Up" width="135" height="292.5">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/mahaamimran/projectKaambun/blob/main/UI/Welcome.png" alt="Welcome" width="135" height="292.5">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="https://github.com/mahaamimran/projectKaambun/blob/main/UI/Home.png" alt="Home" width="135" height="292.5">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="https://github.com/mahaamimran/projectKaambun/blob/main/UI/AddTasks.png" alt="Add Tasks" width="135" height="292.5">
